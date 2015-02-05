@@ -1,0 +1,686 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Page 1</title>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="control_center.js"></script>
+<link rel="stylesheet" type="text/css" href="global.css"/>
+</head>
+<body>
+	<!-- Title page -->
+	<div class="title_page" id="suisftt_01">
+		<!-- <IMG width="918" height="1188" src="soapui-scripting-tutorial-01001.png" alt="background image"> -->
+		<!-- <IMG width="918" height="1188" src="01_image_cover_background.jpg" alt="soapui scripting for the terrified">	 -->
+		<div class="title_text"><nobr><span>SoapUI Scripting</span></nobr></div>
+		<div class="title_subtext"><nobr><span>for the terrified</span></nobr></div>
+		<div class="title_revision"><nobr><span>(rev 2014.08.15)</span></nobr></div>
+	</div>
+	<!-- page 2 -->
+	<div style="" class="page_container" id="suisftt_02">
+		<div class="std_paragraph_container">
+			<p>
+			SoapUI can provide responses that are somewhat dynamic and varying with the use of scripting. An initial benefit is that you will not necessarily need to constantly edit responses if your request data changes. This document will go through the basic process of scripting responses.
+			</p>
+			<p>
+			The first practice you should adopt is the renaming of all responses that you generate.The term response1 and response2 will become difficult to visually track and will cause ambiguity to those reading any logic you script. The author uses a convention similar to operation-name_response_intent for naming responses. Following the author's convention a request that will return a blank response for customer search might have a name like: searchCustomer_response_blank. Following this convention will also make the ctrl+W command (open windows) much easier to read. The images below illustrate one benefit to some sort of intuitive naming convention.
+			</p>
+		</div>
+		<div class="switch_window_examples">
+			<div class="switch_window_default"></div>
+			<div class="switch_window_renamed"></div>
+		</div>
+		<div class="std_paragraph_container">
+			<p>
+				This tutorial will use a trivial model to present the scripting topics. A grooming kit request will be made that includes some very basic pet information that will be used to return a response containing a kit code and price to be used when charging the customer for services and supplies. This simple scripting example will show how to pass-through certain values and also how to apply decision logic on other values.
+			</p>
+			<p>
+				As with most SoapUI projects ours will begin with a wsdl. Follow the instructions in Appendix A to create and save the project wsdl, then create a new generic project in SoapUI using that wsdl as a base. SoapUI should automatically generate your first request and response. This is a good time to rename "request1" and "response1" to something more meaningful.
+			</p>
+		</div>
+		<div class="rename_request-response"></div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 2 of 13</div>
+		</div>
+	</div>
+<!-- page 3 -->
+	<div class="page_container" id="suisftt_03">
+		<div class="std_paragraph_container">
+			<p>
+			With our request and responses stubbed out we can now make a request that has information somewhat more useful than "?" for each of the parameters being passed into the SoapUI mock service. Since we didn't go into any documentation detail on the wsdl I have annotated the request below to give some hints on what each input represents.
+			</p>
+<p>
+<pre style='color:#000020;background:#f6f8ff;'>
+<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span>
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKit</span><span style='color:#0057a6; '>></span>
+			<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> canine, feline, reptile </span><span style='color:#595979; '>--></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>type</span><span style='color:#0057a6; '>></span>canine<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>type</span><span style='color:#0057a6; '>></span>
+			<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> tiny, small, medium, large, extra large </span><span style='color:#595979; '>--></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>size</span><span style='color:#0057a6; '>></span>large<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>size</span><span style='color:#0057a6; '>></span>
+			<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> some common "strain" of the animal </span><span style='color:#595979; '>--></span>
+			<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> like "labrador" or "siamese" or "tree frog" </span><span style='color:#595979; '>--></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>breed</span><span style='color:#0057a6; '>></span>labrador<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>breed</span><span style='color:#0057a6; '>></span>
+			<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> color </span><span style='color:#595979; '>--></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>color</span><span style='color:#0057a6; '>></span>black<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>color</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKit</span><span style='color:#0057a6; '>></span>
+	<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+</pre>
+</p>
+			<p>
+			Now that we have made the request a little more functional we can move on to grooming the response. For this exercise we will put tags into the response and everything else will get handled by our script. Since this tutorial is intending to provide complete control of content through scripting we will tag all of the response elements.
+			</p>
+<p>
+<pre style='color:#000020;background:#f6f8ff;'>
+<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span>
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>${sku}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>${total_price}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>${package_content_code}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>
+			<span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>${is_available}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+	<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+</pre>
+</p>
+		<p>
+			Everywhere "${...}" is encountered the SoapUI service will provide substitution withassignments done in our script. Go ahead and start the mock service by double-clickingthe groomingKitsSOAP MockService and press the "play" button. You should see amessage indicating the service is running. You will also see the single operation thisservice holds in the box titled "Operations".
+			</p>
+		</div>
+
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 3 of 13</div>	
+		</div>
+	</div>	
+	<!-- Page 4 -->
+	<div class="page_container" id="suisftt_04">
+		<div class="std_paragraph_container">
+			<p>
+				Let's see what happens when we send our request into the mock service at this point. In the Navigation pane double-click the "groomingKits_request" object and when a window containing the request content opens up click the play button.
+			</p>
+		</div>
+		<div class="getGroomingKit_response"></div>
+		<div class="std_paragraph_container">
+			<p>
+				Upon clicking the play button your request will be handled by SoapUI's mock service process and a response will be returned. After running the request the response will look like this:
+			</p>
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span> 
+	    <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+	   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+	   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+	      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+	         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>${sku}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>
+	         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>${total_price}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>
+	         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>${package_content_code}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>
+	         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>${is_available}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>
+	      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+	   <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+	<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+	</pre>
+			</p>
+			<p>
+				All of the elements are empty! This is because we didn't include any data in the fields and nothing injected values into the tags. Now we need to work on getting a script written to allow our returned data to resemble something rather than nothing.	
+			</p>
+			<p>
+				SoapUI 5.0 uses Groovy as a scripting language. If you haven't used Groovy before then don't worry, you aren't alone. 
+				No matter what your technical background is the Groovy language paradigm is simple to use and understand. 
+				Since Groovy is already implemented in the SoapUI toolset there is nothing for you to set up on your computer. 
+				(Just start using Groovy!) You can use an online search engine to find answers to most of your Groovy questions. 
+				There is the distinct possibility that not all Groovy features will be available in SoapUI but never fear since you will 
+				find the basic functional operations and syntax work fine. One example of good language documentation can be found at the following 
+				URL : <a href="http://beta.groovy-lang.org/docs/groovy-2.3.0-SNAPSHOT/html/documentation/" target="groovyInfo">http://beta.groovy-lang.org/docs/groovy-2.3.0-SNAPSHOT/html/documentation/</a>.
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 4 of 13</div>
+		</div>
+	</div>
+	<!-- page 5 -->
+	<div class="page_container" id="suisftt_05">
+		<div class="std_paragraph_container">
+			<p>SoapUI response scripting is done on the OPERATION level. Highlight the response operation you want to create a 
+			script for and alt+click to open a menu of choices. Select "Show MockOperation Editor" to open the panel you will use to create scripts.
+			</p>
+		</div>
+		<div class="mo_editor"></div>
+		<div class="std_paragraph_container">
+			<p>
+				In the setGroomingKits Operation Editor find the Label "Dispatch" and select "SCRIPT" in the dropdown. 
+			</p>
+		</div>
+		<div class="mo_script_select"></div>
+		<div class="std_paragraph_container">
+			<p>
+				After selecting "SCRIPT" menu item you will be presented with a script window to work in. The very first thing we must do is 
+				capture the response object. XmlSlurper is included in the SoapUI implementation and so we will start the file out by setting 
+				a request object to work with:
+			</p>
+			<p>
+<pre style='color:#000020;background:#f6f8ff;'>
+<span style='color:#200080; font-weight:bold; '>def</span> req <span style='color:#308080; '>=</span> <span style='color:#200080; font-weight:bold; '>new</span> XmlSlurper<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span><span style='color:#308080; '>.</span>parseText<span style='color:#308080; '>(</span>mockRequest<span style='color:#308080; '>.</span>requestContent<span style='color:#308080; '>)</span>
+</pre>
+			</p>
+			<p>
+				that's it! we now have all of the content of our request available. Retrieving the content is as easy as xpath 
+				to the values. We will write some code to access those fields shortly, but first let's get the script to a point where 
+				it is sending values in our response fields. The response object is accessed using context which is a built-in object for us. 
+				SoapUI has already wired everything up so all we need to do is start plugging in values. Since we have introduced tags to the 
+				response template then we will eventually have direct access to them and don't have to bother with response xpath to set values. 
+				Below is some more Groovy code to set our response fields:
+			</p>
+		</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 5 of 13</div>
+			</div>
+	</div>
+	<!-- page 6 -->
+	<div class="page_container" id="suisftt_06">
+		<div class="std_paragraph_container">
+			<p>
+<pre style='color:#000020;background:#f6f8ff;'>
+context<span style='color:#308080; '>.</span>sku <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"CALG01"</span>
+context<span style='color:#308080; '>.</span>total_price <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"22.00"</span>
+context<span style='color:#308080; '>.</span>package_content_code <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"CANINE-LARGE-ALL"</span>
+context<span style='color:#308080; '>.</span>is_available <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"true"</span>
+</pre>
+			</p>
+			<p>
+	One more feature we are going to go ahead and use is the return keyword and specify exactly the response we wish to send back:
+		return "getGroomingKits_response_all"
+			</p>
+			<p>
+	If you haven't been updating the script pane as you read along then take all of those pieces and put them in your script pane as shown below.
+			</p>
+		</div>
+		<div class="simple_scripting"></div>
+
+		<div class="std_paragraph_container">
+			<p>
+				Now if we run our request through the SoapUI mock service the response will have something that more closely represents a "good" response based 
+				on useful content
+			</p>
+			<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope&gt;</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">></span>
+   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">></span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">></span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">></span>CALG01<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">></span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">></span>22.00<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">></span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">></span>CANINE-LARGE-ALL<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">></span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">></span>true<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">></span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">></span>
+   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">></span>
+<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+</pre>
+		</p>
+		<p>
+	Our response content looks exactly as we typed it in the script. This is all fine and good, except we really haven't done anything that a hardcoded xml 
+	response doesn't already do for us. Let's add some code that will actually use request data to determine what the response content will look like. 
+	We will now go back into our script editor and begin harvesting data from the request.
+		</p>
+		<p>
+	I prematurely had you enter the XmlSlurper line of code into your script even though we aren't using it yet. This was an intentional attempt 
+	to put that into your mind as a first condition on every SoapUI script. So far we have started using scripting with absolutely	
+		</p>
+	</div>	
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 6 of 13</div>
+			</div>
+	</div>	
+	<!--  page 7  -->
+	<div class="page_container" id="suisftt_07">
+		<div class="std_paragraph_container">
+			<p>	
+	no advantage over creating a hardcoded xml document to send back as a response. It's been a lot of work for no benefit! 
+			</p>
+			<p>
+	To get out of our "overcoding" rut we are going to create a scenario where we would expect the response to change depending on input. In our pet grooming service we will probably want to return some different information depending on what type of pet is being worked with. Let's decide on some portions of the response that should reflect the input of different pet types.
+	<ol>
+	<li>The SKU should be different for the different <span class="code_property_text">type</span></span> of pet. (request)</li>
+	<li>The SKU might be different for the different <span class="code_property_text">size</span> of a pet. </li>
+	<li>The PRICE is going to differ depending on pet <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>The PACKAGECODE contains codified information about what product/services are in a package. (We were trying to keep the model simple so no complex arrays of items) PACKAGECODE will change based on the <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>SKU and PACKAGECODE will contain modified information from the request. What I mean by this is that "large" <span class="code_property_text">size</span> is going to need to be translated into "LG" and "LARGE".</li>
+	</ol>
+			</p>
+			<p>
+	That's a pretty good start. There's plenty there to justify writing our script. Arguably there's more we could do by using <span class="code_property_text">breed</span> and <span class="code_property_text">color</span> and we might come back to that sometime later. Let's start accessing the request object and using the information in our response.
+			</p>
+			<p>
+	In advance I know I'm going to use the values of <span class="code_property_text">type</span> and <span class="code_property_text">size</span> multiple times so we'll just go ahead and assign them to vars. For readability I tend to set a lot of vars in my own code, though there are some programming circles that frown upon using a lot of mutable objects.
+			</p>
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#200080; font-weight:bold; '>def</span> pet_type <span style='color:#308080; '>=</span> req<span style='color:#308080; '>.</span>Body<span style='color:#308080; '>.</span>getGroomingKit<span style='color:#308080; '>.</span>type<span style='color:#308080; '>.</span>text<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> pet_size <span style='color:#308080; '>=</span> req<span style='color:#308080; '>.</span>Body<span style='color:#308080; '>.</span>getGroomingKit<span style='color:#308080; '>.</span>size<span style='color:#308080; '>.</span>text<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+	</pre>
+			</p>
+			<p>
+	Next we will handle the requirements to dynamically place value in 2 of 3 SKU segments. In our 6 character SKU the first 2 characters are <b>segment 1</b> and come from the first 2 characters of the pet <span class="code_property_text">type</span>. <b>Segment 2</b> has 2 characters and they represent the size so we need size abbreviation. <b>Segment 3</b> is a two digit number which we won't worry about changing dynamically at this point. The resulting SKU will be something like "CAMD01" for a medium sized canine pet.
+			</p>
+			<p>
+	For segment 1 we will capture the first 2 characters of our pet <span class="code_property_text">type</span> and we will uppercase them in one small piece of code:
+			</p>
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#200080; font-weight:bold; '>def</span> sku_prefix <span style='color:#308080; '>=</span> <span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>[</span><span style='color:#008c00; '>0</span><span style='color:#308080; '>.</span><span style='color:#008000; '>.1</span><span style='color:#308080; '>]</span><span style='color:#308080; '>)</span><span style='color:#308080; '>.</span>toUpperCase<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+				</pre>
+			</p>
+			<p>
+	Next we need to fill in segment 2. We will get size abbreviation with a method using a switch statement. The abbreviate_size method takes an incoming <span class="code_property_text">size</span> ("sze") value and return the defined abbreviation for that size. Any unhandled size text will fall through as UK. (UnKnown)
+			</p>
+			<p>
+	The result of our abbreviate_size() method will be used in the SKU field and it will also be used to calculate base grooming costs by controlling the base cost multiplier.	
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 7 of 13</div>
+		</div>
+	</div>	
+	<!--  page 8 -->
+	<div class="page_container" id="suisftt_08">
+		<div class="std_paragraph_container">
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#200080; font-weight:bold; '>def</span> abbreviate_size<span style='color:#308080; '>(</span> sze <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+		log<span style='color:#308080; '>.</span>info<span style='color:#308080; '>(</span><span style='color:#1060b6; '>"incoming size:${sze}"</span><span style='color:#308080; '>)</span>
+		<span style='color:#200080; font-weight:bold; '>def</span> result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"UK"</span>
+		switch<span style='color:#308080; '>(</span> sze<span style='color:#308080; '>.</span>toLowerCase<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span> <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+	<span style='color:#200080; font-weight:bold; '>		case</span> <span style='color:#1060b6; '>"large"</span>:
+				result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"LG"</span>
+				<span style='color:#200080; font-weight:bold; '>break</span>
+	<span style='color:#200080; font-weight:bold; '>		case</span> <span style='color:#1060b6; '>"extra large"</span>:
+				result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"XL"</span>
+				<span style='color:#200080; font-weight:bold; '>break</span>
+	<span style='color:#200080; font-weight:bold; '>		case</span> <span style='color:#1060b6; '>"medium"</span>:
+				result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"MD"</span>
+				<span style='color:#200080; font-weight:bold; '>break</span>
+	<span style='color:#200080; font-weight:bold; '>		case</span> <span style='color:#1060b6; '>"small"</span>:
+				result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"SM"</span>
+				<span style='color:#200080; font-weight:bold; '>break</span>
+	<span style='color:#200080; font-weight:bold; '>		case</span> <span style='color:#1060b6; '>"tiny"</span> : 
+				result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"XS"</span>
+				<span style='color:#200080; font-weight:bold; '>break</span>
+		}
+		<span style='color:#200080; font-weight:bold; '>return</span> result
+	}
+	</pre>
+			</p>
+			<p>
+	Finally for SKU we need to assign these values to the response we return. The following line of code will do that for us:
+			</p>
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	context<span style='color:#308080; '>.</span>sku <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"${sku_prefix}${size_abbreviation}01"</span>
+	</pre>
+			</p>
+			<p>
+	With these changes run the previous request and you should see SKU change depending on the values you plug into <span class="code_property_text">type</span> and <span class="code_property_text">size</span> request elements. I won't spend any time in the document for just testing the SKU, but tinker with it if you are so inclined at this point. For now our SKU related requirements from the list above are satisfied.
+			</p>
+			<p>
+	Next we will alter the price based on type and size request elements. Each <span class="code_property_text">type</span> of pet will carry a base price for their grooming and then we will increase the price according to pet size. For the base price we will have a hash of values. Cats will have a base price of 40.00 since 50% of groomers claim workman's comp after bathing a cat due to bites and scratches that become infected, but we shall depart from that digression. Dogs have a base cost of 23.00 and reptiles start at 50.00.  Any "new" or unhandled pet type will result in a 150.00 grooming price. The <span class="code_property_text">size</span> multiplier is also contained in a hash and incrementally increases as the pet size grows larger. XS pets will be a multiplier of the base x 1 while XL pets have a multiplier of 2.5. 
+			</p>
+			<p>
+	We will implement a method "assess_grooming_cost" which takes pet <span class="code_property_text">type</span> and pet <span class="code_property_text">size</span> as inputs. This is a pretty straightforward method so there's not much more to do than just plop it below:
+			</p>
+			<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#200080; font-weight:bold; '>def</span> assess_grooming_cost<span style='color:#308080; '>(</span> pet_type, pet_size <span style='color:#308080; '>)</span> <span style='color:#406080; '>{</span>
+		<span style='color:#200080; font-weight:bold; '>def</span> base_cost <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span>feline:<span style='color:#008c00; '>40</span>, canine:<span style='color:#008000; '>23.00</span>, reptile:<span style='color:#008000; '>50.00</span><span style='color:#308080; '>]</span>
+		<span style='color:#200080; font-weight:bold; '>def</span> multiplier <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span>XL:<span style='color:#008000; '>2.5</span>, LG:<span style='color:#008000; '>2.0</span>, MD:<span style='color:#008000; '>1.75</span>, SM:<span style='color:#008000; '>1.5</span>, XS:<span style='color:#008000; '>1.00</span>, UK:<span style='color:#008000; '>2.5</span><span style='color:#308080; '>]</span>
+	<span style='color:#200080; font-weight:bold; '>	if</span><span style='color:#308080; '>(</span> base_cost<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>)</span> > <span style='color:#008c00; '>0</span> &amp;&amp; multiplier<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_size<span style='color:#308080; '>)</span> > <span style='color:#008c00; '>0</span> <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+			<span style='color:#200080; font-weight:bold; '>return</span> base_cost<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>)</span> <span style='color:#308080; '>*</span> multiplier<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_size<span style='color:#308080; '>)</span>
+		<span style='color:#406080; '>}</span>
+		<span style='color:#200080; font-weight:bold; '>return</span> <span style='color:#008000; '>150.00</span>
+	}
+	</pre>
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 8 of 13</div>
+		</div>
+	</div>
+	<!--   page 9  -->
+		<div class="page_container" id="suisftt_09">
+			<div class="std_paragraph_container">
+				<p>
+		With that we need apply our result to the <span class="code_property_text">context</span> and we're done with <span class="code_property_text">price</span> stuff:
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		context<span style='color:#308080; '>.</span>total_price <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+		</pre>
+				</p>
+				<p>
+		Finally we will change the PACKAGECODE element to more appropriately react to changing type and size values. All we need to do is uppercase the type and size values for this so it's a one line win right now:
+				</p>
+				<p>
+	<pre style='color:#000020;background:#f6f8ff;'>
+		context<span style='color:#308080; '>.</span>package_content_code<span style='color:#308080; '>=</span>
+			<span style='color:#1060b6; '>"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+	</pre>
+				</p>
+				<p>
+		Although the tutorial will go to no further effort on building a more contextual PACKAGECODE element we could make it much more interesting by adding components into the code based on what products & services a particular pet or owner might want. (i.e. "CANINE-LARGE-SHAMPOO-STYLE-NAILS-TEETH") You should be pretty comfortable with the scripting environment now and can go back through the script we have written to make some enhancements if you are inclined. For the most part we are done with the logical scripting work, but we do have finishing touches to complete before ending the tutorial.
+				</p>
+				<p>
+		So far we don't have any hooks or decision logic around whether all of the items for a kit are available so a simple assignment will suffice. We will just assume the materials are readily available and wait for sales front line representatives to suggest some sort of enhancement in the future and therefore our <span class="code_property_text">is_available</span> value remains static.
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		context<span style='color:#308080; '>.</span>is_available <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"true"</span>
+		</pre>
+				</p>
+				<p>
+		After all of the logic is done and the tags have been assigned values we need to call out the template we want to apply everything to. So far we have this our logical work held in memory and that will get us nowhere until we "share" it. The final action our script will do is return the <span class="code_property_text">response</span> we want to render. Right now we only have one so that single template will default to our final response but I don't want us to rely on that. The problem with not specifically rendering a response template by name is that SoapUI can be set to randomly switch between multiple templates and that will be a problem for us if we ever add another SoapUI mock response for the getGroomingKit operation. To play it safe make the following line the last in our script:
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		<span style='color:#200080; font-weight:bold; '>return</span> <span style='color:#1060b6; '>"getGroomingKits_response_all"</span>
+		</pre>
+				</p>
+				<p>
+		Hopefully this tutorial has been useful for you. We've really only just barely cracked the eggshell of SoapUI scripting using the Groovy language. I encourage you to take the simple mock we created here and play with it to make it a little more intelligent and elegant. 
+				</p>
+				<p>
+		...but before you go there's a special <b>BONUS</b> I would like to cover. Just in case you haven't latched onto the possibility yet, we can script decision logic to dynamically switch between response templates. So far we are only handling one response but we can do so much more with the tool! Let's add another response to the mix... and let's make that response an error response for those times when someone is tempted to break things.
+				</p>
+				<p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 9 of 13</div>
+			</div>
+		</div>
+		<!-- page 10  -->
+		<div class="page_container" id="suisftt_10">
+			<div class="std_paragraph_container">
+				<p>	
+		In the current script a person could pass "human" or "alien" into the script and we would try to do something with it. The real problem with those example of deviations is that nobody in our grooming company wants to have humans and aliens coming in for a bath! We only like animals here. (...and not really ALL of them) We're going to just stop the madness by rejecting any requests that contain input we aren't built to handle.
+				</p>
+				<p>
+		First we need to create the response template we will return. I'm going to just make it a hardcoded, drop dead easy response for this tutorial. If you have some crazy ideas about forging tags in the error response to indicate what exactly went wrong then you are MY kind of programmer and I think you should go for it. But for now here's our response xml:
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span> 
+		   <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>mockServiceError</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>error</span><span style='color:#0057a6; '>></span>500<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>error</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>msg</span><span style='color:#0057a6; '>></span>Something went wrong<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>msg</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>detail</span><span style='color:#0057a6; '>></span>Check all of your input elements for proper values<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>detail</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>mockServiceError</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+		</pre>
+				</p>
+				<p>
+		Name the new mock response "getGroomingKits_response_error500". Now let's set a flag that determines when we call it. Since this is a bonus we won't make it perfect since there is a certain level of importance the author places on encouraging his readers to tweak and make things "better". Put the code below at the top of your script with the other methods we have written.
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		<span style='color:#200080; font-weight:bold; '>def</span> check_handled_inputs<span style='color:#308080; '>(</span>pt , ps<span style='color:#308080; '>)</span> <span style='color:#406080; '>{</span>
+			handled_types<span style='color:#308080; '>[</span><span style='color:#1060b6; '>"feline"</span>,<span style='color:#1060b6; '>"canine"</span>,<span style='color:#1060b6; '>"reptile"</span><span style='color:#308080; '>]</span>
+			handled_sizes<span style='color:#308080; '>[</span><span style='color:#1060b6; '>"tiny"</span>,<span style='color:#1060b6; '>"small"</span>,<span style='color:#1060b6; '>"medium"</span>,<span style='color:#1060b6; '>"large"</span>,<span style='color:#1060b6; '>"extra large"</span><span style='color:#308080; '>]</span>
+			<span style='color:#200080; font-weight:bold; '>return</span> <span style='color:#308080; '>(</span>handled_types<span style='color:#308080; '>.</span>indexOf<span style='color:#308080; '>(</span>pt<span style='color:#308080; '>)</span> ><span style='color:#308080; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#308080; '>)</span> &amp;&amp; <span style='color:#308080; '>(</span>handled_sizes<span style='color:#308080; '>.</span>indexOf<span style='color:#308080; '>(</span>ps<span style='color:#308080; '>)</span> ><span style='color:#308080; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#308080; '>)</span>
+		<span style='color:#406080; '>}</span>
+		</pre>
+				</p>
+				<p>
+		And finally modify the return statement at the end of our script.
+				</p>
+				<p>
+		<pre style='color:#000020;background:#f6f8ff;'>
+		<span style='color:#200080; font-weight:bold; '>return</span> check_handled_inputs<span style='color:#308080; '>(</span>pet_type, pet_size<span style='color:#308080; '>)</span> ? <span style='color:#1060b6; '>"getGroomingKits_response_all"</span> 
+			: <span style='color:#1060b6; '>"getGroomingKits_response_error500"</span>
+		</pre>
+				</p>
+				<p>
+		That's it and you are done. A lot of room has been left for you to exercise some creative thinking to make the simple mock service much more interactive and variable, but this tutorial should be sufficient to introduce the topic. Thanks for reading through everything and hopefully you now have NO reason to avoid scripting in SoapUI. The working source script is available in this document's Appendix A section.	
+				</p>
+				<p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 10 of 13</div>
+			</div>
+		</div>
+		<!--   page 11 -->
+		<div class="page_container" id="suisftt_11">
+			<div class="std_paragraph_container">
+				<p>
+		<span class="heading">Appendix A : Artifacts</span><br/>
+		<span class="heading2">The project WSDL</span><br/>
+		<span>use this attached WSDL by placing it into a text editor and saving the file as "GroomingKits.wsdl" somewhere convenient on an available storage device.</span>
+				</p></div>
+				<div class="std_paragraph_container">
+					<p>
+<pre style='color:#000020;background:#f6f8ff;'>
+<span style='color:#004a43; '>&lt;?</span><span style='color:#200080; font-weight:bold; '>xml</span><span style='color:#004a43; '> </span><span style='color:#074726; '>version</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#7d0045; '>1.0</span><span style='color:#1060b6; '>"</span><span style='color:#004a43; '> </span><span style='color:#074726; '>encoding</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>UTF-8</span><span style='color:#1060b6; '>"</span><span style='color:#004a43; '> </span><span style='color:#074726; '>standalone</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0f4d75; '>no</span><span style='color:#1060b6; '>"</span><span style='color:#004a43; '>?></span>
+<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>definitions</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soap</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/wsdl/soap/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>tns</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>wsdl</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/wsdl/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>xsd</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.w3.org</span><span style='color:#40015a; '>/2001/XMLSchema</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>GroomingKits</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#474796; '>targetNamespace</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>http://www.example.org/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>types</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>schema</span> <span style='color:#474796; '>targetNamespace</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>http://www.example.org/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKit</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:PetInfo</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKitResponse</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>sequence</span><span style='color:#0057a6; '>></span>
+      			<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>sku</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      			<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>price</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:int</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      			<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>packageCode</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      			<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>available</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:boolean</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>sequence</span><span style='color:#0057a6; '>></span>
+      	<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>PetInfo</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>sequence</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>type</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>size</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>breed</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      		<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>color</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>xsd:string</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>element</span><span style='color:#0057a6; '>></span>
+      	<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>sequence</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span><span style='color:#0057a6; '>></span>    
+            <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>kit_contents</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span><span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>complexType</span><span style='color:#0057a6; '>></span>
+        <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>xsd</span><span style='color:#406080; '>:</span><span style='color:#333385; '>schema</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>types</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>message</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKitRequest</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>part</span> <span style='color:#474796; '>element</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:getGroomingKit</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>parameters</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>message</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>message</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKitResponse</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>part</span> <span style='color:#474796; '>element</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:getGroomingKitResponse</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>parameters</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>message</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>portType</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>GroomingKits</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>operation</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKit</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>input</span> <span style='color:#474796; '>message</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:getGroomingKitRequest</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>output</span> <span style='color:#474796; '>message</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:getGroomingKitResponse</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+    <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>operation</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>portType</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>binding</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>GroomingKitsSOAP</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>type</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:GroomingKits</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soap</span><span style='color:#406080; '>:</span><span style='color:#333385; '>binding</span> <span style='color:#474796; '>style</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>document</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>transport</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>http://schemas.xmlsoap.org/soap/http</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>operation</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>getGroomingKit</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soap</span><span style='color:#406080; '>:</span><span style='color:#333385; '>operation</span> <span style='color:#474796; '>soapAction</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>http://www.example.org/GroomingKits/getGroomingKit</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>input</span><span style='color:#0057a6; '>></span>
+        <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soap</span><span style='color:#406080; '>:</span><span style='color:#333385; '>body</span> <span style='color:#474796; '>use</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>literal</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>input</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>output</span><span style='color:#0057a6; '>></span>
+        <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soap</span><span style='color:#406080; '>:</span><span style='color:#333385; '>body</span> <span style='color:#474796; '>use</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>literal</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>output</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>operation</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>binding</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>service</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>GroomingKits</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+    <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>port</span> <span style='color:#474796; '>binding</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>tns:GroomingKitsSOAP</span><span style='color:#1060b6; '>"</span> <span style='color:#474796; '>name</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>GroomingKitsSOAP</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soap</span><span style='color:#406080; '>:</span><span style='color:#333385; '>address</span> <span style='color:#474796; '>location</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#1060b6; '>http://www.example.org/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>/></span>
+    <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>port</span><span style='color:#0057a6; '>></span>
+  <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>service</span><span style='color:#0057a6; '>></span>
+<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>wsdl</span><span style='color:#406080; '>:</span><span style='color:#333385; '>definitions</span><span style='color:#0057a6; '>></span>
+</pre>
+				</p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 11 of 13</div>
+			</div>		
+		</div>
+		<!-- page 12 -->
+		<div class="page_container" id="suisftt_12">
+			<div class="std_paragraph_container">
+				<p>
+		<span class="heading2">getGroomingKits_request XML:</span>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKit</span><span style='color:#0057a6; '>></span>
+		      	<span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> canine, feline, reptile </span><span style='color:#595979; '>--></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>type</span><span style='color:#0057a6; '>></span>canine<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>type</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> tiny, small, medium, large, extra large </span><span style='color:#595979; '>--></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>size</span><span style='color:#0057a6; '>></span>large<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>size</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> some common "strain" of the animal </span><span style='color:#595979; '>--></span>
+		         <span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> like "labrador" or "siamese" or "tree frog" </span><span style='color:#595979; '>--></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>breed</span><span style='color:#0057a6; '>></span>labrador<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>breed</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#595979; '>&lt;!--</span><span style='color:#595979; '> color </span><span style='color:#595979; '>--></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>color</span><span style='color:#0057a6; '>></span>black<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>color</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKit</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+	</pre>
+				</p><p>
+		<span class="heading2">getGroomingKits_response_all XML:</span>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>${sku}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>sku</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>${total_price}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>price</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>${package_content_code}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>packageCode</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>${is_available}<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>available</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>getGroomingKitResponse</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+	</pre>
+				</p><p>
+					<span class="heading2">getGroomingKits_response_error XML:</span>
+	<pre style='color:#000020;background:#f6f8ff;'>
+	<span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span> <span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>soapenv</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>schemas.xmlsoap.org</span><span style='color:#40015a; '>/soap/envelope/</span><span style='color:#1060b6; '>"</span> 
+	<span style='color:#0066ee; '>xmlns</span><span style='color:#406080; '>:</span><span style='color:#074726; '>gro</span><span style='color:#308080; '>=</span><span style='color:#1060b6; '>"</span><span style='color:#0066ee; '>http</span><span style='color:#406080; '>:</span><span style='color:#200080; font-weight:bold; '>//</span><span style='color:#5555dd; '>www.example.org</span><span style='color:#40015a; '>/GroomingKits/</span><span style='color:#1060b6; '>"</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Header</span><span style='color:#0057a6; '>/></span>
+		   <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>mockServiceError</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>error</span><span style='color:#0057a6; '>></span>500<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>error</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>msg</span><span style='color:#0057a6; '>></span>Something went wrong<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>msg</span><span style='color:#0057a6; '>></span>
+		         <span style='color:#0057a6; '>&lt;</span><span style='color:#333385; '>detail</span><span style='color:#0057a6; '>></span>Check all of your input elements for proper values<span style='color:#0057a6; '>&lt;/</span><span style='color:#333385; '>detail</span><span style='color:#0057a6; '>></span>
+		      <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>gro</span><span style='color:#406080; '>:</span><span style='color:#333385; '>mockServiceError</span><span style='color:#0057a6; '>></span>
+		   <span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Body</span><span style='color:#0057a6; '>></span>
+		<span style='color:#0057a6; '>&lt;/</span><span style='color:#0066ee; '>soapenv</span><span style='color:#406080; '>:</span><span style='color:#333385; '>Envelope</span><span style='color:#0057a6; '>></span>
+	</pre>
+				</p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 12 of 13</div>
+			</div>		
+		</div>
+		<!-- page 13  -->
+			<div class="page_container" id="suisftt_13">
+				<div class="std_paragraph_container">
+					<p>
+						<span class="heading2">getGroomingKit mock operation script:</span>
+		<pre style='color:#000020;background:#f6f8ff;'>
+<span style='color:#200080; font-weight:bold; '>def</span> req <span style='color:#308080; '>=</span> <span style='color:#200080; font-weight:bold; '>new</span> XmlSlurper<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span><span style='color:#308080; '>.</span>parseText<span style='color:#308080; '>(</span>mockRequest<span style='color:#308080; '>.</span>requestContent<span style='color:#308080; '>)</span>
+<span style='color:#308080; '>/</span><span style='color:#308080; '>/</span>we need to map sizes to abbreviations
+<span style='color:#200080; font-weight:bold; '>def</span> abbreviate_size<span style='color:#308080; '>(</span> sze <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+	log<span style='color:#308080; '>.</span>info<span style='color:#308080; '>(</span><span style='color:#1060b6; '>"incoming size:${sze}"</span><span style='color:#308080; '>)</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"UK"</span>
+	switch<span style='color:#308080; '>(</span> sze<span style='color:#308080; '>.</span>toLowerCase<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span> <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+<span style='color:#200080; font-weight:bold; '>			case</span> <span style='color:#1060b6; '>"large"</span>:
+			result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"LG"</span>
+			<span style='color:#200080; font-weight:bold; '>break</span>
+<span style='color:#200080; font-weight:bold; '>			case</span> <span style='color:#1060b6; '>"extra large"</span>:
+			result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"XL"</span>
+			<span style='color:#200080; font-weight:bold; '>break</span>
+<span style='color:#200080; font-weight:bold; '>			case</span> <span style='color:#1060b6; '>"medium"</span>:
+			result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"MD"</span>
+			<span style='color:#200080; font-weight:bold; '>break</span>
+<span style='color:#200080; font-weight:bold; '>			case</span> <span style='color:#1060b6; '>"small"</span>:
+			result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"SM"</span>
+			<span style='color:#200080; font-weight:bold; '>break</span>
+<span style='color:#200080; font-weight:bold; '>			case</span> <span style='color:#1060b6; '>"tiny"</span> : 
+			result <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"XS"</span>
+			<span style='color:#200080; font-weight:bold; '>break</span>
+	}
+	<span style='color:#200080; font-weight:bold; '>return</span> result
+}
+
+<span style='color:#200080; font-weight:bold; '>def</span> assess_grooming_cost<span style='color:#308080; '>(</span> pet_type, pet_size <span style='color:#308080; '>)</span> <span style='color:#406080; '>{</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> base_cost <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span>feline:<span style='color:#008c00; '>40</span>, canine:<span style='color:#008000; '>23.00</span>, reptile:<span style='color:#008000; '>50.00</span><span style='color:#308080; '>]</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> multiplier <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span>XL:<span style='color:#008000; '>2.5</span>, LG:<span style='color:#008000; '>2.0</span>, MD:<span style='color:#008000; '>1.75</span>, SM:<span style='color:#008000; '>1.5</span>, XS:<span style='color:#008000; '>1.00</span>, UK:<span style='color:#008000; '>2.5</span><span style='color:#308080; '>]</span>
+<span style='color:#200080; font-weight:bold; '>		if</span><span style='color:#308080; '>(</span> base_cost<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>)</span> > <span style='color:#008c00; '>0</span> &amp;&amp; multiplier<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_size<span style='color:#308080; '>)</span> > <span style='color:#008c00; '>0</span> <span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+		<span style='color:#200080; font-weight:bold; '>return</span> base_cost<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>)</span> <span style='color:#308080; '>*</span> multiplier<span style='color:#308080; '>.</span>get<span style='color:#308080; '>(</span>pet_size<span style='color:#308080; '>)</span>
+	<span style='color:#406080; '>}</span>
+	<span style='color:#200080; font-weight:bold; '>return</span> <span style='color:#008000; '>150.00</span>
+}
+
+<span style='color:#200080; font-weight:bold; '>def</span> check_handled_inputs<span style='color:#308080; '>(</span>pt , ps<span style='color:#308080; '>)</span><span style='color:#406080; '>{</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> handled_types <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span><span style='color:#1060b6; '>"feline"</span>,<span style='color:#1060b6; '>"canine"</span>,<span style='color:#1060b6; '>"reptile"</span><span style='color:#308080; '>]</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> handled_sizes <span style='color:#308080; '>=</span> <span style='color:#308080; '>[</span><span style='color:#1060b6; '>"tiny"</span>,<span style='color:#1060b6; '>"small"</span>,<span style='color:#1060b6; '>"medium"</span>,<span style='color:#1060b6; '>"large"</span>,<span style='color:#1060b6; '>"extra large"</span><span style='color:#308080; '>]</span>
+	<span style='color:#200080; font-weight:bold; '>def</span> is_handled <span style='color:#308080; '>=</span> <span style='color:#308080; '>(</span><span style='color:#308080; '>(</span>handled_types<span style='color:#308080; '>.</span>indexOf<span style='color:#308080; '>(</span>pt<span style='color:#308080; '>)</span> ><span style='color:#308080; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#308080; '>)</span> &amp;&amp; 
+		<span style='color:#308080; '>(</span>handled_sizes<span style='color:#308080; '>.</span>indexOf<span style='color:#308080; '>(</span>ps<span style='color:#308080; '>)</span> ><span style='color:#308080; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#308080; '>)</span><span style='color:#308080; '>)</span>
+	<span style='color:#200080; font-weight:bold; '>return</span> is_handled
+}
+
+<span style='color:#308080; '>/</span><span style='color:#308080; '>/</span> set our inputs to vars as needed
+<span style='color:#200080; font-weight:bold; '>def</span> pet_type <span style='color:#308080; '>=</span> req<span style='color:#308080; '>.</span>Body<span style='color:#308080; '>.</span>getGroomingKit<span style='color:#308080; '>.</span>type<span style='color:#308080; '>.</span>text<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+<span style='color:#200080; font-weight:bold; '>def</span> pet_size <span style='color:#308080; '>=</span> req<span style='color:#308080; '>.</span>Body<span style='color:#308080; '>.</span>getGroomingKit<span style='color:#308080; '>.</span>size<span style='color:#308080; '>.</span>text<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+
+<span style='color:#308080; '>/</span><span style='color:#308080; '>/</span>use the abbreviation method to generate segment of SKU
+<span style='color:#200080; font-weight:bold; '>def</span> size_abbreviation <span style='color:#308080; '>=</span> abbreviate_size<span style='color:#308080; '>(</span> pet_size <span style='color:#308080; '>)</span>
+
+<span style='color:#308080; '>/</span><span style='color:#308080; '>/</span>we will just use the first two characters of type <span style='color:#200080; font-weight:bold; '>for</span> the prefix
+<span style='color:#200080; font-weight:bold; '>def</span> sku_prefix <span style='color:#308080; '>=</span> <span style='color:#308080; '>(</span>pet_type<span style='color:#308080; '>[</span><span style='color:#008c00; '>0</span><span style='color:#308080; '>.</span><span style='color:#008000; '>.1</span><span style='color:#308080; '>]</span><span style='color:#308080; '>)</span><span style='color:#308080; '>.</span>toUpperCase<span style='color:#308080; '>(</span><span style='color:#308080; '>)</span>
+
+context<span style='color:#308080; '>.</span>sku <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"${sku_prefix}${size_abbreviation}01"</span>
+context<span style='color:#308080; '>.</span>total_price <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+context<span style='color:#308080; '>.</span>package_content_code <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+context<span style='color:#308080; '>.</span>is_available <span style='color:#308080; '>=</span> <span style='color:#1060b6; '>"true"</span>
+
+
+<span style='color:#200080; font-weight:bold; '>return</span> check_handled_inputs<span style='color:#308080; '>(</span>pet_type, pet_size<span style='color:#308080; '>)</span> ? 
+	<span style='color:#1060b6; '>"getGroomingKits_response_all"</span> : <span style='color:#1060b6; '>"getGroomingKits_response_error500"</span>
+		</pre>
+					</p>
+				</div>
+				<div class="page_footer">
+					<div class="footer_left">SoapUI Scripting for the terrified</div>
+					<div class="footer_right">Page 13 of 13</div>
+				</div>	
+			</div>			
+</body>
+</html>

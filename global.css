@@ -1,0 +1,311 @@
+	.title_text {
+		position:absolute;
+		top:178;
+		left:221;
+		font-size:52px;
+		font-family:Times;
+		color:#000000;
+		font-weight:bold;
+		letter-spacing:0.93182px;
+		}
+	.title_subtext {
+		font-size:16px;
+		font-family:Times;
+		color:#000000;
+		font-style:italic;
+		letter-spacing:0.82867px;
+		position:absolute;
+		top:240;
+		left:397;
+	}
+	.title_revision {
+		virtical-align:top;
+		font-size:11px;
+		font-family:Times;
+		color:#000000;
+		letter-spacing:1.16597px;
+		position:absolute;
+		top:1068;
+		left:410;
+	}
+	.title_page {
+		position: relative;
+		top:0;
+		left:0;
+		width: 918px;
+		height: 1212px; /*1188px;*/
+		margin-bottom:10px;
+		background:#000000 url("01_image_cover_background.jpg") no-repeat;
+		background-size: 100% 100%;
+	}
+
+/* Page2 css */
+/* ******* custom (page content) css settings ********/
+	.switch_window_examples{
+		position: relative;
+		margin:30px 0 30px 0;
+		width:650px;
+		height:200;
+	}
+
+	.switch_window_default {
+		background:#ffffff url("02_image_switch-window_cryptic.jpg") no-repeat;
+		float:left;	
+		width:296px;
+		height:200px;
+	}
+
+	.switch_window_renamed {
+		background:#ffffff url("02_image_switch-window_clear.jpg") no-repeat;
+		float:right;	
+		width:350px;
+		height:200px;
+	
+	}
+
+	.rename_request-response {
+		position:relative;
+		width:476px;
+		height:246px;
+		margin:30px 0 30px 90px;
+		background:#ffffff url("02_image_meaningful_names.jpg") no-repeat;		
+	}
+
+/* page4 css */
+	.getGroomingKit_response {
+		position:relative;
+		width:559px;
+		height:262px;
+		margin:30px 0 30px 90px;
+		background:#ffffff url("04_image_getgroomingkitresponse.jpg") no-repeat;
+	}
+
+/* page 5 css */
+	.mo_editor {
+		position:relative;
+		width:505px;
+		height:257px;
+		margin:20px 0 20px 90px;
+		background:#ffffff url("05_image_mock_operation_editor.jpg") no-repeat;
+	}
+	
+	.mo_script_select {
+		position:relative;
+		width:433px;
+		height:318px;
+		margin:20px 0 20px 90px;
+		background:#ffffff url("05_image_select_script.jpg") no-repeat;
+	}
+
+/* page 6 css */
+	
+	.simple_scripting {
+			position:relative;
+			width:508px;
+			height:321px;
+			margin:30px 0 30px 90px;
+			background:#ffffff url("05_image_select_script.jpg") no-repeat;
+	}
+	
+/* page 11 css */
+	.heading {
+		font-size: 30px;
+		font-weight: bold;
+		line-height: 28px;
+	}
+
+	.heading2 {
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 20px;
+	}	
+
+/* ******Transportable CSS Settings********** */
+	body {
+		background:#A0A0A0;
+	}
+	
+	.body_print {
+		background:#ffffff;
+	}
+
+	a:link {
+		color: blue;
+	}
+
+	a:visited {
+		color: blue;
+	}
+	
+	pre {
+		font-size:10pt;
+	}
+
+	.page_container {
+		background: #ffffff;
+		position:relative;
+		width:828px;/*918 total*/
+		height:1067px; /*1048px;*/ /*1188 total*/
+		padding:50px 0 90px 90px;
+		margin-bottom:10px;
+	}
+	
+	.page_container_multi{
+		background: #ffffff;
+		position:relative;
+		width:828px;/*918 total*/
+		height:1074px; /*1048px;*/ /*1188 total*/
+		padding:50px 0 90px 90px;
+		margin-bottom:10px;
+		border-bottom:1px solid black;
+	}	
+	
+	.std_paragraph_container {
+		font-size:18px;
+		font-family:arial,georgia,times;
+		color:#000000;
+		position:relative;
+		width:750px;
+	}
+	
+	.tight_paragraph_container {
+		font-size:16px;
+		font-family:arial,georgia,times;
+		color:#000000;
+		position:relative;
+		width:750px;
+		line-height: 14px;
+	}
+		
+	.page_footer {
+		position:absolute;
+		bottom:20px;
+		width:650px;
+		height:30px;
+	}
+	
+	.footer_left {
+		float:left;
+		height:21px;
+		text-align:left;
+		font-size:13px;
+		font-family:georgia,arial,times;
+		color:#4c4c4c;
+		font-weight:bold;
+		font-style:italic;
+	}
+	
+	.footer_right {
+		float:right;
+		height:21px;
+		text-align:right;
+		font-size:13px;
+		font-family:georgia,arial,times;
+		color:#4c4c4c;
+		font-weight:bold;
+		font-style:italic;
+	}
+
+	.code_property_text {
+		font-family: courier;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	
+	
+/* ***************** Code Syntax Colors ***************** */
+	.xmlsnippet_pre_default {
+		/*	style='color:#000020;background:#f6f8ff;'	*/
+		color:#000020;
+		background: #f6f8ff;
+	}
+	
+	.xmlsnippet_brackets {
+		/*	style='color:#0057a6; '	*/
+		color:#0057a6; 
+	}
+	
+	.xmlsnippet_ns {
+		/*	style='color:#0066ee; '	*/
+		color:#0066ee; 
+	}
+	
+	.xmlsnippet_code {
+		/*	style='color:#333385; '	*/
+		color:#333385;
+	}
+	
+	.xmlsnippet_value {
+		
+	}
+	
+	.xmlsnippet_colon {
+		/*	style='color:#406080; '	*/
+		color:#406080;
+	}
+	
+	.xmlsnippet_operator {
+		/*	style='color:#308080; '	*/
+		color:#308080;
+	}
+	
+	.xmlsnippet_punct {
+		/* style='color:#1060b6; ' */
+		color:#1060b6; 
+	}
+	
+	.xmlsnippet_target {
+		/*	style='color:#074726; '	*/
+		color:#074726;
+	}
+	
+	.xmlsnippet_port_direct {
+		/*	style='color:#200080; font-weight:bold; '	*/
+		color:#200080; 
+		font-weight:bold;
+	}
+	
+	.xmlsnippet_path {
+		/*	style='color:#40015a; '	*/
+		color:#40015a;
+	}
+	
+	.xmlsnippet_domain {
+		/*	style='color:#5555dd; '	*/
+		color:#5555dd;
+	}
+	
+	.xmlsnippet_comment {
+		/*	style='color:#595979; '	*/
+		color:#595979;
+	}
+	
+	.xmlsnippet_declare_qm {
+		/*	style='color:#004a43; '	*/
+		color:#004a43;
+	}
+	
+	.xmlsnippet_version {
+		/*	style='color:#7d0045; '	*/
+		color:#7d0045;
+	}
+	
+	.xmlsnippet_standalone_value {
+		/*	style='color:#0f4d75; '	*/
+		color:#0f4d75;
+	}
+	
+	.xmlsnippet_element_name {
+		/*	style='color:#474796; '	*/
+		color:#474796;
+	}
+	
+	.code_hash_value {
+		/*	style='color:#008000; '	*/
+		color:#008000;
+	}
+	
+	.code_zero_value {
+		/*	style='color:#008c00; '	*/
+		color:#008c00;
+	}

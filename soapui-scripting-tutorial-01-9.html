@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Page 9</TITLE>
+
+<link rel="stylesheet" type="text/css" href="global.css"/>
+<script type="text/javascript" src="control_center.js"></script>
+    <script type="text/javascript">
+    <!--
+    var pageType="middle";
+    // -->
+    </script>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</HEAD>
+<body>
+	<div class="page_container" id="suisftt_09">
+		<div class="std_paragraph_container">
+			<p>
+	With that we need apply our result to the <span class="code_property_text">context</span> and we're done with <span class="code_property_text">price</span> stuff:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	context<span class="xmlsnippet_operator">.</span>total_price <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+	</pre>
+			</p>
+			<p>
+	Finally we will change the PACKAGECODE element to more appropriately react to changing type and size values. All we need to do is uppercase the type and size values for this so it's a one line win right now:
+			</p>
+			<p>
+<pre class="xmlsnippet_pre_default">
+	context<span class="xmlsnippet_operator">.</span>package_content_code<span class="xmlsnippet_operator">=</span>
+		<span class="xmlsnippet_punct">"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+</pre>
+			</p>
+			<p>
+	Although the tutorial will go to no further effort on building a more contextual PACKAGECODE element we could make it much more interesting by adding components into the code based on what products & services a particular pet or owner might want. (i.e. "CANINE-LARGE-SHAMPOO-STYLE-NAILS-TEETH") You should be pretty comfortable with the scripting environment now and can go back through the script we have written to make some enhancements if you are inclined. For the most part we are done with the logical scripting work, but we do have finishing touches to complete before ending the tutorial.
+			</p>
+			<p>
+	So far we don't have any hooks or decision logic around whether all of the items for a kit are available so a simple assignment will suffice. We will just assume the materials are readily available and wait for sales front line representatives to suggest some sort of enhancement in the future and therefore our <span class="code_property_text">is_available</span> value remains static.
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	context<span class="xmlsnippet_operator">.</span>is_available <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"true"</span>
+	</pre>
+			</p>
+			<p>
+	After all of the logic is done and the tags have been assigned values we need to call out the template we want to apply everything to. So far we have this our logical work held in memory and that will get us nowhere until we "share" it. The final action our script will do is return the <span class="code_property_text">response</span> we want to render. Right now we only have one so that single template will default to our final response but I don't want us to rely on that. The problem with not specifically rendering a response template by name is that SoapUI can be set to randomly switch between multiple templates and that will be a problem for us if we ever add another SoapUI mock response for the getGroomingKit operation. To play it safe make the following line the last in our script:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">return</span> <span class="xmlsnippet_punct">"getGroomingKits_response_all"</span>
+	</pre>
+			</p>
+			<p>
+	Hopefully this tutorial has been useful for you. We've really only just barely cracked the eggshell of SoapUI scripting using the Groovy language. I encourage you to take the simple mock we created here and play with it to make it a little more intelligent and elegant. 
+			</p>
+			<p>
+	...but before you go there's a special <b>BONUS</b> I would like to cover. Just in case you haven't latched onto the possibility yet, we can script decision logic to dynamically switch between response templates. So far we are only handling one response but we can do so much more with the tool! Let's add another response to the mix... and let's make that response an error response for those times when someone is tempted to break things.
+			</p>
+			<p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 9 of 13</div>
+		</div>
+	</div>
+</body>
+</HTML>

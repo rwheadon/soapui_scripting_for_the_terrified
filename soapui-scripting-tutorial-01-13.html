@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Page 13</TITLE>
+
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="global.css"/>
+	<script type="text/javascript" src="control_center.js"></script>
+<script type="text/javascript">
+<!--
+var pageType="last";
+// -->
+</script>
+</HEAD>
+<body>
+
+				<div class="page_container" id="suisftt_13">
+					<div class="std_paragraph_container">
+						<p>
+						<span class="heading2">getGroomingKit mock operation script:</span>
+		<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_port_direct">def</span> req <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_port_direct">new</span> XmlSlurper<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>parseText<span class="xmlsnippet_operator">(</span>mockRequest<span class="xmlsnippet_operator">.</span>requestContent<span class="xmlsnippet_operator">)</span>
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>we need to map sizes to abbreviations
+<span class="xmlsnippet_port_direct">def</span> abbreviate_size<span class="xmlsnippet_operator">(</span> sze <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	log<span class="xmlsnippet_operator">.</span>info<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_punct">"incoming size:${sze}"</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">def</span> result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"UK"</span>
+	switch<span class="xmlsnippet_operator">(</span> sze<span class="xmlsnippet_operator">.</span>toLowerCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"large"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"LG"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"extra large"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XL"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"medium"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"MD"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"small"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"SM"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"tiny"</span> : 
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XS"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+	}
+	<span class="xmlsnippet_port_direct">return</span> result
+}
+
+<span class="xmlsnippet_port_direct">def</span> assess_grooming_cost<span class="xmlsnippet_operator">(</span> pet_type, pet_size <span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">def</span> base_cost <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>feline:<span class="code_zero_value">40</span>, canine:<span class="code_hash_value">23.00</span>, reptile:<span class="code_hash_value">50.00</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> multiplier <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>XL:<span class="code_hash_value">2.5</span>, LG:<span class="code_hash_value">2.0</span>, MD:<span class="code_hash_value">1.75</span>, SM:<span class="code_hash_value">1.5</span>, XS:<span class="code_hash_value">1.00</span>, UK:<span class="code_hash_value">2.5</span><span class="xmlsnippet_operator">]</span>
+<span class="xmlsnippet_port_direct">		if</span><span class="xmlsnippet_operator">(</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> &amp;&amp; multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+		<span class="xmlsnippet_port_direct">return</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">*</span> multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_colon">}</span>
+	<span class="xmlsnippet_port_direct">return</span> <span class="code_hash_value">150.00</span>
+}
+
+<span class="xmlsnippet_port_direct">def</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pt , ps<span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">def</span> handled_types <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"feline"</span>,<span class="xmlsnippet_punct">"canine"</span>,<span class="xmlsnippet_punct">"reptile"</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> handled_sizes <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"tiny"</span>,<span class="xmlsnippet_punct">"small"</span>,<span class="xmlsnippet_punct">"medium"</span>,<span class="xmlsnippet_punct">"large"</span>,<span class="xmlsnippet_punct">"extra large"</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> is_handled <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">(</span>handled_types<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>pt<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span> &amp;&amp; 
+		<span class="xmlsnippet_operator">(</span>handled_sizes<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>ps<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">return</span> is_handled
+}
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span> set our inputs to vars as needed
+<span class="xmlsnippet_port_direct">def</span> pet_type <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>type<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+<span class="xmlsnippet_port_direct">def</span> pet_size <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>size<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>use the abbreviation method to generate segment of SKU
+<span class="xmlsnippet_port_direct">def</span> size_abbreviation <span class="xmlsnippet_operator">=</span> abbreviate_size<span class="xmlsnippet_operator">(</span> pet_size <span class="xmlsnippet_operator">)</span>
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>we will just use the first two characters of type <span class="xmlsnippet_port_direct">for</span> the prefix
+<span class="xmlsnippet_port_direct">def</span> sku_prefix <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">[</span><span class="code_zero_value">0</span><span class="xmlsnippet_operator">.</span><span class="code_hash_value">.1</span><span class="xmlsnippet_operator">]</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>toUpperCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+
+context<span class="xmlsnippet_operator">.</span>sku <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${sku_prefix}${size_abbreviation}01"</span>
+context<span class="xmlsnippet_operator">.</span>total_price <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+context<span class="xmlsnippet_operator">.</span>package_content_code <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+context<span class="xmlsnippet_operator">.</span>is_available <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"true"</span>
+
+
+<span class="xmlsnippet_port_direct">return</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pet_type, pet_size<span class="xmlsnippet_operator">)</span> ? 
+	<span class="xmlsnippet_punct">"getGroomingKits_response_all"</span> : <span class="xmlsnippet_punct">"getGroomingKits_response_error500"</span>
+		</pre>
+						</p>
+					</div>
+					<div class="page_footer">
+						<div class="footer_left">SoapUI Scripting for the terrified</div>
+						<div class="footer_right">Page 13 of 13</div>
+					</div>	
+				</div>
+	
+</body>
+</HTML>

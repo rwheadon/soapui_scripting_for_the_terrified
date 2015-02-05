@@ -1,0 +1,1020 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Page 1</title>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+/************ vars ****************/
+//Load up the footer label...
+var footer_left_value = '"SoapUI Scripting for the Terrified" : Rich Wheadon';
+
+/************ methods ****************/
+function replaceContentInContainer(matchClass, content) {
+    var elems = document.getElementsByTagName('*'), i;
+    for (i in elems) {
+        if((' ' + elems[i].className + ' ').indexOf(' ' + matchClass + ' ')
+                > -1) {
+            elems[i].innerHTML = content;
+        }
+    }
+}
+
+/************ control center ****************/
+// We're going to fire the following methods on every fire //
+setTimeout(function(){
+ replaceContentInContainer("footer_left", footer_left_value)
+}, 5000);	
+</script>
+
+<style type="text/css">
+	.title_text {
+		position:absolute;
+		top:178;
+		left:221;
+		font-size:52px;
+		font-family:Times;
+		color:#000000;
+		font-weight:bold;
+		letter-spacing:0.93182px;
+		}
+	.title_subtext {
+		font-size:16px;
+		font-family:Times;
+		color:#000000;
+		font-style:italic;
+		letter-spacing:0.82867px;
+		position:absolute;
+		top:240;
+		left:397;
+	}
+	.title_revision {
+		virtical-align:top;
+		font-size:11px;
+		font-family:Times;
+		color:#000000;
+		letter-spacing:1.16597px;
+		position:absolute;
+		top:1068;
+		left:410;
+	}
+	.title_page {
+		position: relative;
+		top:0;
+		left:0;
+		width: 918px;
+		height: 1212px; /*1188px;*/
+		margin-bottom:10px;
+		background:#000000 url("01_image_cover_background.jpg") no-repeat;
+		background-size: 100% 100%;
+	}
+
+/* Page2 css */
+/* ******* custom (page content) css settings ********/
+	.switch_window_examples{
+		position: relative;
+		margin:30px 0 30px 0;
+		width:650px;
+		height:200;
+	}
+
+	.switch_window_default {
+		background:#ffffff url("02_image_switch-window_cryptic.jpg") no-repeat;
+		float:left;	
+		width:296px;
+		height:200px;
+	}
+
+	.switch_window_renamed {
+		background:#ffffff url("02_image_switch-window_clear.jpg") no-repeat;
+		float:right;	
+		width:350px;
+		height:200px;
+	
+	}
+
+	.rename_request-response {
+		position:relative;
+		width:476px;
+		height:246px;
+		margin:30px 0 30px 90px;
+		background:#ffffff url("02_image_meaningful_names.jpg") no-repeat;		
+	}
+
+/* page4 css */
+	.getGroomingKit_response {
+		position:relative;
+		width:559px;
+		height:262px;
+		margin:30px 0 30px 90px;
+		background:#ffffff url("04_image_getgroomingkitresponse.jpg") no-repeat;
+	}
+
+/* page 5 css */
+	.mo_editor {
+		position:relative;
+		width:505px;
+		height:257px;
+		margin:20px 0 20px 90px;
+		background:#ffffff url("05_image_mock_operation_editor.jpg") no-repeat;
+	}
+	
+	.mo_script_select {
+		position:relative;
+		width:433px;
+		height:318px;
+		margin:20px 0 20px 90px;
+		background:#ffffff url("05_image_select_script.jpg") no-repeat;
+	}
+
+/* page 6 css */
+	
+	.simple_scripting {
+			position:relative;
+			width:508px;
+			height:321px;
+			margin:30px 0 30px 90px;
+			background:#ffffff url("05_image_select_script.jpg") no-repeat;
+	}
+	
+/* page 11 css */
+	.heading {
+		font-size: 30px;
+		font-weight: bold;
+		line-height: 28px;
+	}
+
+	.heading2 {
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 20px;
+	}	
+
+/* ******Transportable CSS Settings********** */
+	body {
+		background:#A0A0A0;
+	}
+	
+	.body_print {
+		background:#ffffff;
+	}
+
+	a:link {
+		color: blue;
+	}
+
+	a:visited {
+		color: blue;
+	}
+	
+	pre {
+		font-size:10pt;
+	}
+
+	.page_container {
+		background: #ffffff;
+		position:relative;
+		width:828px;/*918 total*/
+		height:1067px; /*1048px;*/ /*1188 total*/
+		padding:50px 0 90px 90px;
+		margin-bottom:10px;
+	}
+	
+	.page_container_multi{
+		background: #ffffff;
+		position:relative;
+		width:828px;/*918 total*/
+		height:1074px; /*1048px;*/ /*1188 total*/
+		padding:50px 0 90px 90px;
+		margin-bottom:10px;
+		border-bottom:1px solid black;
+	}	
+	
+	.std_paragraph_container {
+		font-size:18px;
+		font-family:arial,georgia,times;
+		color:#000000;
+		position:relative;
+		width:750px;
+	}
+	
+	.tight_paragraph_container {
+		font-size:16px;
+		font-family:arial,georgia,times;
+		color:#000000;
+		position:relative;
+		width:750px;
+		line-height: 14px;
+	}
+		
+	.page_footer {
+		position:absolute;
+		bottom:20px;
+		width:650px;
+		height:30px;
+	}
+	
+	.footer_left {
+		float:left;
+		height:21px;
+		text-align:left;
+		font-size:13px;
+		font-family:georgia,arial,times;
+		color:#4c4c4c;
+		font-weight:bold;
+		font-style:italic;
+	}
+	
+	.footer_right {
+		float:right;
+		height:21px;
+		text-align:right;
+		font-size:13px;
+		font-family:georgia,arial,times;
+		color:#4c4c4c;
+		font-weight:bold;
+		font-style:italic;
+	}
+
+	.code_property_text {
+		font-family: courier;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	
+	
+/* ***************** Code Syntax Colors ***************** */
+	.xmlsnippet_pre_default {
+		/*	style='color:#000020;background:#f6f8ff;'	*/
+		color:#000020;
+		background: #f6f8ff;
+	}
+	
+	.xmlsnippet_brackets {
+		/*	style='color:#0057a6; '	*/
+		color:#0057a6; 
+	}
+	
+	.xmlsnippet_ns {
+		/*	style='color:#0066ee; '	*/
+		color:#0066ee; 
+	}
+	
+	.xmlsnippet_code {
+		/*	style='color:#333385; '	*/
+		color:#333385;
+	}
+	
+	.xmlsnippet_value {
+		
+	}
+	
+	.xmlsnippet_colon {
+		/*	style='color:#406080; '	*/
+		color:#406080;
+	}
+	
+	.xmlsnippet_operator {
+		/*	style='color:#308080; '	*/
+		color:#308080;
+	}
+	
+	.xmlsnippet_punct {
+		/* style='color:#1060b6; ' */
+		color:#1060b6; 
+	}
+	
+	.xmlsnippet_target {
+		/*	style='color:#074726; '	*/
+		color:#074726;
+	}
+	
+	.xmlsnippet_port_direct {
+		/*	style='color:#200080; font-weight:bold; '	*/
+		color:#200080; 
+		font-weight:bold;
+	}
+	
+	.xmlsnippet_path {
+		/*	style='color:#40015a; '	*/
+		color:#40015a;
+	}
+	
+	.xmlsnippet_domain {
+		/*	style='color:#5555dd; '	*/
+		color:#5555dd;
+	}
+	
+	.xmlsnippet_comment {
+		/*	style='color:#595979; '	*/
+		color:#595979;
+	}
+	
+	.xmlsnippet_declare_qm {
+		/*	style='color:#004a43; '	*/
+		color:#004a43;
+	}
+	
+	.xmlsnippet_version {
+		/*	style='color:#7d0045; '	*/
+		color:#7d0045;
+	}
+	
+	.xmlsnippet_standalone_value {
+		/*	style='color:#0f4d75; '	*/
+		color:#0f4d75;
+	}
+	
+	.xmlsnippet_element_name {
+		/*	style='color:#474796; '	*/
+		color:#474796;
+	}
+	
+	.code_hash_value {
+		/*	style='color:#008000; '	*/
+		color:#008000;
+	}
+	
+	.code_zero_value {
+		/*	style='color:#008c00; '	*/
+		color:#008c00;
+	}
+</style>
+</head>
+<body>
+	<!-- Title page -->
+	<div class="title_page" id="suisftt_01">
+		<!-- <IMG width="918" height="1188" src="soapui-scripting-tutorial-01001.png" alt="background image"> -->
+		<!-- <IMG width="918" height="1188" src="01_image_cover_background.jpg" alt="soapui scripting for the terrified">	 -->
+		<div class="title_text"><nobr><span>SoapUI Scripting</span></nobr></div>
+		<div class="title_subtext"><nobr><span>for the terrified</span></nobr></div>
+		<div class="title_revision"><nobr><span>(rev 2014.08.15)</span></nobr></div>
+	</div>
+	<!-- page 2 -->
+	<div style="" class="page_container_multi" id="suisftt_02">
+		<div class="std_paragraph_container">
+			<p>
+			SoapUI can provide responses that are somewhat dynamic and varying with the use of scripting. An initial benefit is that you will not necessarily need to constantly edit responses if your request data changes. This document will go through the basic process of scripting responses.
+			</p>
+			<p>
+			The first practice you should adopt is the renaming of all responses that you generate.The term response1 and response2 will become difficult to visually track and will cause ambiguity to those reading any logic you script. The author uses a convention similar to operation-name_response_intent for naming responses. Following the author's convention a request that will return a blank response for customer search might have a name like: searchCustomer_response_blank. Following this convention will also make the ctrl+W command (open windows) much easier to read. The images below illustrate one benefit to some sort of intuitive naming convention.
+			</p>
+		</div>
+		<div class="switch_window_examples">
+			<div class="switch_window_default"></div>
+			<div class="switch_window_renamed"></div>
+		</div>
+		<div class="std_paragraph_container">
+			<p>
+				This tutorial will use a trivial model to present the scripting topics. A grooming kit request will be made that includes some very basic pet information that will be used to return a response containing a kit code and price to be used when charging the customer for services and supplies. This simple scripting example will show how to pass-through certain values and also how to apply decision logic on other values.
+			</p>
+			<p>
+				As with most SoapUI projects ours will begin with a wsdl. Follow the instructions in Appendix A to create and save the project wsdl, then create a new generic project in SoapUI using that wsdl as a base. SoapUI should automatically generate your first request and response. This is a good time to rename "request1" and "response1" to something more meaningful.
+			</p>
+		</div>
+		<div class="rename_request-response"></div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 2 of 13</div>
+		</div>
+	</div>
+<!-- page 3 -->
+	<div class="page_container_multi" id="suisftt_03">
+		<div class="std_paragraph_container">
+			<p>
+			With our request and responses stubbed out we can now make a request that has information somewhat more useful than "?" for each of the parameters being passed into the SoapUI mock service. Since we didn't go into any documentation detail on the wsdl I have annotated the request below to give some hints on what each input represents.
+			</p>
+<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span>
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKit</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> canine, feline, reptile </span><span class="xmlsnippet_comment">--></span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">type</span><span class="xmlsnippet_brackets">&gt;</span>canine<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">type</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> tiny, small, medium, large, extra large </span><span class="xmlsnippet_comment">--></span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">size</span><span class="xmlsnippet_brackets">&gt;</span>large<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">size</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> some common "strain" of the animal </span><span class="xmlsnippet_comment">--></span>
+			<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> like "labrador" or "siamese" or "tree frog" </span><span class="xmlsnippet_comment">--></span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">breed</span><span class="xmlsnippet_brackets">&gt;</span>labrador<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">breed</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> color </span><span class="xmlsnippet_comment">--></span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">color</span><span class="xmlsnippet_brackets">&gt;</span>black<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">color</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKit</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+</pre>
+</p>
+			<p>
+			Now that we have made the request a little more functional we can move on to grooming the response. For this exercise we will put tags into the response and everything else will get handled by our script. Since this tutorial is intending to provide complete control of content through scripting we will tag all of the response elements.
+			</p>
+<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span>
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>${sku}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>${total_price}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>${package_content_code}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>
+			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>${is_available}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+</pre>
+</p>
+		<p>
+			Everywhere "${...}" is encountered the SoapUI service will provide substitution withassignments done in our script. Go ahead and start the mock service by double-clickingthe groomingKitsSOAP MockService and press the "play" button. You should see amessage indicating the service is running. You will also see the single operation thisservice holds in the box titled "Operations".
+			</p>
+		</div>
+
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 3 of 13</div>	
+		</div>
+	</div>	
+	<!-- Page 4 -->
+	<div class="page_container_multi" id="suisftt_04">
+		<div class="std_paragraph_container">
+			<p>
+				Let's see what happens when we send our request into the mock service at this point. In the Navigation pane double-click the "groomingKits_request" object and when a window containing the request content opens up click the play button.
+			</p>
+		</div>
+		<div class="getGroomingKit_response"></div>
+		<div class="std_paragraph_container">
+			<p>
+				Upon clicking the play button your request will be handled by SoapUI's mock service process and a response will be returned. After running the request the response will look like this:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	    <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+	   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+	   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+	      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>${sku}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>${total_price}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>${package_content_code}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>${is_available}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>
+	      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+	   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+	</pre>
+			</p>
+			<p>
+				All of the elements are empty! This is because we didn't include any data in the fields and nothing injected values into the tags. Now we need to work on getting a script written to allow our returned data to resemble something rather than nothing.	
+			</p>
+			<p>
+				SoapUI 5.0 uses Groovy as a scripting language. If you haven't used Groovy before then don't worry, you aren't alone. 
+				No matter what your technical background is the Groovy language paradigm is simple to use and understand. 
+				Since Groovy is already implemented in the SoapUI toolset there is nothing for you to set up on your computer. 
+				(Just start using Groovy!) You can use an online search engine to find answers to most of your Groovy questions. 
+				There is the distinct possibility that not all Groovy features will be available in SoapUI but never fear since you will 
+				find the basic functional operations and syntax work fine. One example of good language documentation can be found at the following 
+				URL : <a href="http://beta.groovy-lang.org/docs/groovy-2.3.0-SNAPSHOT/html/documentation/" target="groovyInfo">http://beta.groovy-lang.org/docs/groovy-2.3.0-SNAPSHOT/html/documentation/</a>.
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 4 of 13</div>
+		</div>
+	</div>
+	<!-- page 5 -->
+	<div class="page_container_multi" id="suisftt_05">
+		<div class="std_paragraph_container">
+			<p>SoapUI response scripting is done on the OPERATION level. Highlight the response operation you want to create a 
+			script for and alt+click to open a menu of choices. Select "Show MockOperation Editor" to open the panel you will use to create scripts.
+			</p>
+		</div>
+		<div class="mo_editor"></div>
+		<div class="std_paragraph_container">
+			<p>
+				In the setGroomingKits Operation Editor find the Label "Dispatch" and select "SCRIPT" in the dropdown. 
+			</p>
+		</div>
+		<div class="mo_script_select"></div>
+		<div class="std_paragraph_container">
+			<p>
+				After selecting "SCRIPT" menu item you will be presented with a script window to work in. The very first thing we must do is 
+				capture the response object. XmlSlurper is included in the SoapUI implementation and so we will start the file out by setting 
+				a request object to work with:
+			</p>
+			<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_port_direct">def</span> req <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_port_direct">new</span> XmlSlurper<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>parseText<span class="xmlsnippet_operator">(</span>mockRequest<span class="xmlsnippet_operator">.</span>requestContent<span class="xmlsnippet_operator">)</span>
+</pre>
+			</p>
+			<p>
+				that's it! we now have all of the content of our request available. Retrieving the content is as easy as xpath 
+				to the values. We will write some code to access those fields shortly, but first let's get the script to a point where 
+				it is sending values in our response fields. The response object is accessed using context which is a built-in object for us. 
+				SoapUI has already wired everything up so all we need to do is start plugging in values. Since we have introduced tags to the 
+				response template then we will eventually have direct access to them and don't have to bother with response xpath to set values. 
+				Below is some more Groovy code to set our response fields:
+			</p>
+		</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 5 of 13</div>
+			</div>
+	</div>
+	<!-- page 6 -->
+	<div class="page_container_multi" id="suisftt_06">
+		<div class="std_paragraph_container">
+			<p>
+<pre class="xmlsnippet_pre_default">
+context<span class="xmlsnippet_operator">.</span>sku <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"CALG01"</span>
+context<span class="xmlsnippet_operator">.</span>total_price <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"22.00"</span>
+context<span class="xmlsnippet_operator">.</span>package_content_code <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"CANINE-LARGE-ALL"</span>
+context<span class="xmlsnippet_operator">.</span>is_available <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"true"</span>
+</pre>
+			</p>
+			<p>
+	One more feature we are going to go ahead and use is the return keyword and specify exactly the response we wish to send back:
+		return "getGroomingKits_response_all"
+			</p>
+			<p>
+	If you haven't been updating the script pane as you read along then take all of those pieces and put them in your script pane as shown below.
+			</p>
+		</div>
+		<div class="simple_scripting"></div>
+
+		<div class="std_paragraph_container">
+			<p>
+				Now if we run our request through the SoapUI mock service the response will have something that more closely represents a "good" response based 
+				on useful content
+			</p>
+			<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope&gt;</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>CALG01<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>22.00<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>CANINE-LARGE-ALL<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>
+         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>true<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+</pre>
+		</p>
+		<p>
+	Our response content looks exactly as we typed it in the script. This is all fine and good, except we really haven't done anything that a hardcoded xml 
+	response doesn't already do for us. Let's add some code that will actually use request data to determine what the response content will look like. 
+	We will now go back into our script editor and begin harvesting data from the request.
+		</p>
+		<p>
+	I prematurely had you enter the XmlSlurper line of code into your script even though we aren't using it yet. This was an intentional attempt 
+	to put that into your mind as a first condition on every SoapUI script. So far we have started using scripting with absolutely	
+		</p>
+	</div>	
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 6 of 13</div>
+			</div>
+	</div>	
+	<!--  page 7  -->
+	<div class="page_container_multi" id="suisftt_07">
+		<div class="std_paragraph_container">
+			<p>	
+	no advantage over creating a hardcoded xml document to send back as a response. It's been a lot of work for no benefit! 
+			</p>
+			<p>
+	To get out of our "overcoding" rut we are going to create a scenario where we would expect the response to change depending on input. In our pet grooming service we will probably want to return some different information depending on what type of pet is being worked with. Let's decide on some portions of the response that should reflect the input of different pet types.
+	<ol>
+	<li>The SKU should be different for the different <span class="code_property_text">type</span></span> of pet. (request)</li>
+	<li>The SKU might be different for the different <span class="code_property_text">size</span> of a pet. </li>
+	<li>The PRICE is going to differ depending on pet <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>The PACKAGECODE contains codified information about what product/services are in a package. (We were trying to keep the model simple so no complex arrays of items) PACKAGECODE will change based on the <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>SKU and PACKAGECODE will contain modified information from the request. What I mean by this is that "large" <span class="code_property_text">size</span> is going to need to be translated into "LG" and "LARGE".</li>
+	</ol>
+			</p>
+			<p>
+	That's a pretty good start. There's plenty there to justify writing our script. Arguably there's more we could do by using <span class="code_property_text">breed</span> and <span class="code_property_text">color</span> and we might come back to that sometime later. Let's start accessing the request object and using the information in our response.
+			</p>
+			<p>
+	In advance I know I'm going to use the values of <span class="code_property_text">type</span> and <span class="code_property_text">size</span> multiple times so we'll just go ahead and assign them to vars. For readability I tend to set a lot of vars in my own code, though there are some programming circles that frown upon using a lot of mutable objects.
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> pet_type <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>type<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">def</span> pet_size <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>size<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+	</pre>
+			</p>
+			<p>
+	Next we will handle the requirements to dynamically place value in 2 of 3 SKU segments. In our 6 character SKU the first 2 characters are <b>segment 1</b> and come from the first 2 characters of the pet <span class="code_property_text">type</span>. <b>Segment 2</b> has 2 characters and they represent the size so we need size abbreviation. <b>Segment 3</b> is a two digit number which we won't worry about changing dynamically at this point. The resulting SKU will be something like "CAMD01" for a medium sized canine pet.
+			</p>
+			<p>
+	For segment 1 we will capture the first 2 characters of our pet <span class="code_property_text">type</span> and we will uppercase them in one small piece of code:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> sku_prefix <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">[</span><span class="code_zero_value">0</span><span class="xmlsnippet_operator">.</span><span class="code_hash_value">.1</span><span class="xmlsnippet_operator">]</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>toUpperCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+				</pre>
+			</p>
+			<p>
+	Next we need to fill in segment 2. We will get size abbreviation with a method using a switch statement. The abbreviate_size method takes an incoming <span class="code_property_text">size</span> ("sze") value and return the defined abbreviation for that size. Any unhandled size text will fall through as UK. (UnKnown)
+			</p>
+			<p>
+	The result of our abbreviate_size() method will be used in the SKU field and it will also be used to calculate base grooming costs by controlling the base cost multiplier.	
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 7 of 13</div>
+		</div>
+	</div>	
+	<!--  page 8 -->
+	<div class="page_container_multi" id="suisftt_08">
+		<div class="std_paragraph_container">
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> abbreviate_size<span class="xmlsnippet_operator">(</span> sze <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+		log<span class="xmlsnippet_operator">.</span>info<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_punct">"incoming size:${sze}"</span><span class="xmlsnippet_operator">)</span>
+		<span class="xmlsnippet_port_direct">def</span> result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"UK"</span>
+		switch<span class="xmlsnippet_operator">(</span> sze<span class="xmlsnippet_operator">.</span>toLowerCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"large"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"LG"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"extra large"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XL"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"medium"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"MD"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"small"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"SM"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"tiny"</span> : 
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XS"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+		}
+		<span class="xmlsnippet_port_direct">return</span> result
+	}
+	</pre>
+			</p>
+			<p>
+	Finally for SKU we need to assign these values to the response we return. The following line of code will do that for us:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	context<span class="xmlsnippet_operator">.</span>sku <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${sku_prefix}${size_abbreviation}01"</span>
+	</pre>
+			</p>
+			<p>
+	With these changes run the previous request and you should see SKU change depending on the values you plug into <span class="code_property_text">type</span> and <span class="code_property_text">size</span> request elements. I won't spend any time in the document for just testing the SKU, but tinker with it if you are so inclined at this point. For now our SKU related requirements from the list above are satisfied.
+			</p>
+			<p>
+	Next we will alter the price based on type and size request elements. Each <span class="code_property_text">type</span> of pet will carry a base price for their grooming and then we will increase the price according to pet size. For the base price we will have a hash of values. Cats will have a base price of 40.00 since 50% of groomers claim workman's comp after bathing a cat due to bites and scratches that become infected, but we shall depart from that digression. Dogs have a base cost of 23.00 and reptiles start at 50.00.  Any "new" or unhandled pet type will result in a 150.00 grooming price. The <span class="code_property_text">size</span> multiplier is also contained in a hash and incrementally increases as the pet size grows larger. XS pets will be a multiplier of the base x 1 while XL pets have a multiplier of 2.5. 
+			</p>
+			<p>
+	We will implement a method "assess_grooming_cost" which takes pet <span class="code_property_text">type</span> and pet <span class="code_property_text">size</span> as inputs. This is a pretty straightforward method so there's not much more to do than just plop it below:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> assess_grooming_cost<span class="xmlsnippet_operator">(</span> pet_type, pet_size <span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+		<span class="xmlsnippet_port_direct">def</span> base_cost <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>feline:<span class="code_zero_value">40</span>, canine:<span class="code_hash_value">23.00</span>, reptile:<span class="code_hash_value">50.00</span><span class="xmlsnippet_operator">]</span>
+		<span class="xmlsnippet_port_direct">def</span> multiplier <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>XL:<span class="code_hash_value">2.5</span>, LG:<span class="code_hash_value">2.0</span>, MD:<span class="code_hash_value">1.75</span>, SM:<span class="code_hash_value">1.5</span>, XS:<span class="code_hash_value">1.00</span>, UK:<span class="code_hash_value">2.5</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">	if</span><span class="xmlsnippet_operator">(</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> &amp;&amp; multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+			<span class="xmlsnippet_port_direct">return</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">*</span> multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span>
+		<span class="xmlsnippet_colon">}</span>
+		<span class="xmlsnippet_port_direct">return</span> <span class="code_hash_value">150.00</span>
+	}
+	</pre>
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 8 of 13</div>
+		</div>
+	</div>
+	<!--   page 9  -->
+		<div class="page_container_multi" id="suisftt_09">
+			<div class="std_paragraph_container">
+				<p>
+		With that we need apply our result to the <span class="code_property_text">context</span> and we're done with <span class="code_property_text">price</span> stuff:
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		context<span class="xmlsnippet_operator">.</span>total_price <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+		</pre>
+				</p>
+				<p>
+		Finally we will change the PACKAGECODE element to more appropriately react to changing type and size values. All we need to do is uppercase the type and size values for this so it's a one line win right now:
+				</p>
+				<p>
+	<pre class="xmlsnippet_pre_default">
+		context<span class="xmlsnippet_operator">.</span>package_content_code<span class="xmlsnippet_operator">=</span>
+			<span class="xmlsnippet_punct">"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+	</pre>
+				</p>
+				<p>
+		Although the tutorial will go to no further effort on building a more contextual PACKAGECODE element we could make it much more interesting by adding components into the code based on what products & services a particular pet or owner might want. (i.e. "CANINE-LARGE-SHAMPOO-STYLE-NAILS-TEETH") You should be pretty comfortable with the scripting environment now and can go back through the script we have written to make some enhancements if you are inclined. For the most part we are done with the logical scripting work, but we do have finishing touches to complete before ending the tutorial.
+				</p>
+				<p>
+		So far we don't have any hooks or decision logic around whether all of the items for a kit are available so a simple assignment will suffice. We will just assume the materials are readily available and wait for sales front line representatives to suggest some sort of enhancement in the future and therefore our <span class="code_property_text">is_available</span> value remains static.
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		context<span class="xmlsnippet_operator">.</span>is_available <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"true"</span>
+		</pre>
+				</p>
+				<p>
+		After all of the logic is done and the tags have been assigned values we need to call out the template we want to apply everything to. So far we have this our logical work held in memory and that will get us nowhere until we "share" it. The final action our script will do is return the <span class="code_property_text">response</span> we want to render. Right now we only have one so that single template will default to our final response but I don't want us to rely on that. The problem with not specifically rendering a response template by name is that SoapUI can be set to randomly switch between multiple templates and that will be a problem for us if we ever add another SoapUI mock response for the getGroomingKit operation. To play it safe make the following line the last in our script:
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		<span class="xmlsnippet_port_direct">return</span> <span class="xmlsnippet_punct">"getGroomingKits_response_all"</span>
+		</pre>
+				</p>
+				<p>
+		Hopefully this tutorial has been useful for you. We've really only just barely cracked the eggshell of SoapUI scripting using the Groovy language. I encourage you to take the simple mock we created here and play with it to make it a little more intelligent and elegant. 
+				</p>
+				<p>
+		...but before you go there's a special <b>BONUS</b> I would like to cover. Just in case you haven't latched onto the possibility yet, we can script decision logic to dynamically switch between response templates. So far we are only handling one response but we can do so much more with the tool! Let's add another response to the mix... and let's make that response an error response for those times when someone is tempted to break things.
+				</p>
+				<p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 9 of 13</div>
+			</div>
+		</div>
+		<!-- page 10  -->
+		<div class="page_container_multi" id="suisftt_10">
+			<div class="std_paragraph_container">
+				<p>	
+		In the current script a person could pass "human" or "alien" into the script and we would try to do something with it. The real problem with those example of deviations is that nobody in our grooming company wants to have humans and aliens coming in for a bath! We only like animals here. (...and not really ALL of them) We're going to just stop the madness by rejecting any requests that contain input we aren't built to handle.
+				</p>
+				<p>
+		First we need to create the response template we will return. I'm going to just make it a hardcoded, drop dead easy response for this tutorial. If you have some crazy ideas about forging tags in the error response to indicate what exactly went wrong then you are MY kind of programmer and I think you should go for it. But for now here's our response xml:
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+		   <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>500<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>Something went wrong<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>Check all of your input elements for proper values<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+		</pre>
+				</p>
+				<p>
+		Name the new mock response "getGroomingKits_response_error500". Now let's set a flag that determines when we call it. Since this is a bonus we won't make it perfect since there is a certain level of importance the author places on encouraging his readers to tweak and make things "better". Put the code below at the top of your script with the other methods we have written.
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		<span class="xmlsnippet_port_direct">def</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pt , ps<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+			handled_types<span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"feline"</span>,<span class="xmlsnippet_punct">"canine"</span>,<span class="xmlsnippet_punct">"reptile"</span><span class="xmlsnippet_operator">]</span>
+			handled_sizes<span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"tiny"</span>,<span class="xmlsnippet_punct">"small"</span>,<span class="xmlsnippet_punct">"medium"</span>,<span class="xmlsnippet_punct">"large"</span>,<span class="xmlsnippet_punct">"extra large"</span><span class="xmlsnippet_operator">]</span>
+			<span class="xmlsnippet_port_direct">return</span> <span class="xmlsnippet_operator">(</span>handled_types<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>pt<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span> &amp;&amp; <span class="xmlsnippet_operator">(</span>handled_sizes<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>ps<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span>
+		<span class="xmlsnippet_colon">}</span>
+		</pre>
+				</p>
+				<p>
+		And finally modify the return statement at the end of our script.
+				</p>
+				<p>
+		<pre class="xmlsnippet_pre_default">
+		<span class="xmlsnippet_port_direct">return</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pet_type, pet_size<span class="xmlsnippet_operator">)</span> ? <span class="xmlsnippet_punct">"getGroomingKits_response_all"</span> 
+			: <span class="xmlsnippet_punct">"getGroomingKits_response_error500"</span>
+		</pre>
+				</p>
+				<p>
+		That's it and you are done. A lot of room has been left for you to exercise some creative thinking to make the simple mock service much more interactive and variable, but this tutorial should be sufficient to introduce the topic. Thanks for reading through everything and hopefully you now have NO reason to avoid scripting in SoapUI. The working source script is available in this document's Appendix A section.	
+				</p>
+				<p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 10 of 13</div>
+			</div>
+		</div>
+		<!--   page 11 -->
+		<div class="page_container_multi" id="suisftt_11">
+			<div class="std_paragraph_container">
+				<p>
+		<span class="heading">Appendix A : Artifacts</span><br/>
+		<span class="heading2">The project WSDL</span><br/>
+		<span>use this attached WSDL by placing it into a text editor and saving the file as "GroomingKits.wsdl" somewhere convenient on an available storage device.</span>
+				</p></div>
+				<div class="tight_paragraph_container">
+					<p>
+<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_declare_qm">&lt;?</span><span class="xmlsnippet_port_direct">xml</span><span class="xmlsnippet_declare_qm"> </span><span class="xmlsnippet_target">version</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_version">1.0</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_declare_qm"> </span><span class="xmlsnippet_target">encoding</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">UTF-8</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_declare_qm"> </span><span class="xmlsnippet_target">standalone</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_standalone_value">no</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_declare_qm">?></span>
+<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">definitions</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soap</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/wsdl/soap/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">tns</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">wsdl</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/wsdl/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">xsd</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.w3.org</span><span class="xmlsnippet_path">/2001/XMLSchema</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">GroomingKits</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_element_name">targetNamespace</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">http://www.example.org/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">types</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">schema</span> <span class="xmlsnippet_element_name">targetNamespace</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">http://www.example.org/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKit</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:PetInfo</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKitResponse</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">sequence</span><span class="xmlsnippet_brackets">&gt;</span>
+      			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">sku</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">price</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:int</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">packageCode</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      			<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">available</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:boolean</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">sequence</span><span class="xmlsnippet_brackets">&gt;</span>
+      	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">PetInfo</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">sequence</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">type</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">size</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">breed</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      		<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">color</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">xsd:string</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">element</span><span class="xmlsnippet_brackets">&gt;</span>
+      	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">sequence</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span><span class="xmlsnippet_brackets">&gt;</span>    
+            <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">kit_contents</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span><span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">complexType</span><span class="xmlsnippet_brackets">&gt;</span>
+        <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">xsd</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">schema</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">types</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">message</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKitRequest</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">part</span> <span class="xmlsnippet_element_name">element</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:getGroomingKit</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">parameters</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">message</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">message</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKitResponse</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">part</span> <span class="xmlsnippet_element_name">element</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:getGroomingKitResponse</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">parameters</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">message</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">portType</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">GroomingKits</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">operation</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKit</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">input</span> <span class="xmlsnippet_element_name">message</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:getGroomingKitRequest</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">output</span> <span class="xmlsnippet_element_name">message</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:getGroomingKitResponse</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+    <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">operation</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">portType</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">binding</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">GroomingKitsSOAP</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">type</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:GroomingKits</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soap</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">binding</span> <span class="xmlsnippet_element_name">style</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">document</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">transport</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">http://schemas.xmlsoap.org/soap/http</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">operation</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">getGroomingKit</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soap</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">operation</span> <span class="xmlsnippet_element_name">soapAction</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">http://www.example.org/GroomingKits/getGroomingKit</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">input</span><span class="xmlsnippet_brackets">&gt;</span>
+        <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soap</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">body</span> <span class="xmlsnippet_element_name">use</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">literal</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">input</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">output</span><span class="xmlsnippet_brackets">&gt;</span>
+        <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soap</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">body</span> <span class="xmlsnippet_element_name">use</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">literal</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">output</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">operation</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">binding</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">service</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">GroomingKits</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+    <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">port</span> <span class="xmlsnippet_element_name">binding</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">tns:GroomingKitsSOAP</span><span class="xmlsnippet_punct">"</span> <span class="xmlsnippet_element_name">name</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">GroomingKitsSOAP</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soap</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">address</span> <span class="xmlsnippet_element_name">location</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_punct">http://www.example.org/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">/></span>
+    <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">port</span><span class="xmlsnippet_brackets">&gt;</span>
+  <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">service</span><span class="xmlsnippet_brackets">&gt;</span>
+<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">wsdl</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">definitions</span><span class="xmlsnippet_brackets">&gt;</span>
+</pre>
+				</p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 11 of 13</div>
+			</div>		
+		</div>
+		<!-- page 12 -->
+		<div class="page_container_multi" id="suisftt_12">
+			<div class="std_paragraph_container">
+				<p>
+		<span class="heading2">getGroomingKits_request XML:</span>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKit</span><span class="xmlsnippet_brackets">&gt;</span>
+		      	<span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> canine, feline, reptile </span><span class="xmlsnippet_comment">--></span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">type</span><span class="xmlsnippet_brackets">&gt;</span>canine<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">type</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> tiny, small, medium, large, extra large </span><span class="xmlsnippet_comment">--></span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">size</span><span class="xmlsnippet_brackets">&gt;</span>large<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">size</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> some common "strain" of the animal </span><span class="xmlsnippet_comment">--></span>
+		         <span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> like "labrador" or "siamese" or "tree frog" </span><span class="xmlsnippet_comment">--></span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">breed</span><span class="xmlsnippet_brackets">&gt;</span>labrador<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">breed</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_comment">&lt;!--</span><span class="xmlsnippet_comment"> color </span><span class="xmlsnippet_comment">--></span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">color</span><span class="xmlsnippet_brackets">&gt;</span>black<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">color</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKit</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+	</pre>
+				</p><p>
+		<span class="heading2">getGroomingKits_response_all XML:</span>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>${sku}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">sku</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>${total_price}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">price</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>${package_content_code}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">packageCode</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>${is_available}<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">available</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">getGroomingKitResponse</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+	</pre>
+				</p><p>
+					<span class="heading2">getGroomingKits_response_error XML:</span>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	<span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+		   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>500<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>Something went wrong<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>
+		         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>Check all of your input elements for proper values<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>
+		      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+		   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+		<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+	</pre>
+				</p>
+			</div>
+			<div class="page_footer">
+				<div class="footer_left">SoapUI Scripting for the terrified</div>
+				<div class="footer_right">Page 12 of 13</div>
+			</div>		
+		</div>
+		<!-- page 13  -->
+			<div class="page_container_multi" id="suisftt_13">
+				<div class="std_paragraph_container">
+					<p>
+						<span class="heading2">getGroomingKit mock operation script:</span>
+		<pre class="xmlsnippet_pre_default">
+<span class="xmlsnippet_port_direct">def</span> req <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_port_direct">new</span> XmlSlurper<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>parseText<span class="xmlsnippet_operator">(</span>mockRequest<span class="xmlsnippet_operator">.</span>requestContent<span class="xmlsnippet_operator">)</span>
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>we need to map sizes to abbreviations
+<span class="xmlsnippet_port_direct">def</span> abbreviate_size<span class="xmlsnippet_operator">(</span> sze <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	log<span class="xmlsnippet_operator">.</span>info<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_punct">"incoming size:${sze}"</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">def</span> result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"UK"</span>
+	switch<span class="xmlsnippet_operator">(</span> sze<span class="xmlsnippet_operator">.</span>toLowerCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"large"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"LG"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"extra large"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XL"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"medium"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"MD"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"small"</span>:
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"SM"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+<span class="xmlsnippet_port_direct">			case</span> <span class="xmlsnippet_punct">"tiny"</span> : 
+			result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XS"</span>
+			<span class="xmlsnippet_port_direct">break</span>
+	}
+	<span class="xmlsnippet_port_direct">return</span> result
+}
+
+<span class="xmlsnippet_port_direct">def</span> assess_grooming_cost<span class="xmlsnippet_operator">(</span> pet_type, pet_size <span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">def</span> base_cost <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>feline:<span class="code_zero_value">40</span>, canine:<span class="code_hash_value">23.00</span>, reptile:<span class="code_hash_value">50.00</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> multiplier <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>XL:<span class="code_hash_value">2.5</span>, LG:<span class="code_hash_value">2.0</span>, MD:<span class="code_hash_value">1.75</span>, SM:<span class="code_hash_value">1.5</span>, XS:<span class="code_hash_value">1.00</span>, UK:<span class="code_hash_value">2.5</span><span class="xmlsnippet_operator">]</span>
+<span class="xmlsnippet_port_direct">		if</span><span class="xmlsnippet_operator">(</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> &amp;&amp; multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+		<span class="xmlsnippet_port_direct">return</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">*</span> multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_colon">}</span>
+	<span class="xmlsnippet_port_direct">return</span> <span class="code_hash_value">150.00</span>
+}
+
+<span class="xmlsnippet_port_direct">def</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pt , ps<span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">def</span> handled_types <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"feline"</span>,<span class="xmlsnippet_punct">"canine"</span>,<span class="xmlsnippet_punct">"reptile"</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> handled_sizes <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"tiny"</span>,<span class="xmlsnippet_punct">"small"</span>,<span class="xmlsnippet_punct">"medium"</span>,<span class="xmlsnippet_punct">"large"</span>,<span class="xmlsnippet_punct">"extra large"</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">def</span> is_handled <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">(</span>handled_types<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>pt<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span> &amp;&amp; 
+		<span class="xmlsnippet_operator">(</span>handled_sizes<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>ps<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">return</span> is_handled
+}
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span> set our inputs to vars as needed
+<span class="xmlsnippet_port_direct">def</span> pet_type <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>type<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+<span class="xmlsnippet_port_direct">def</span> pet_size <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>size<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>use the abbreviation method to generate segment of SKU
+<span class="xmlsnippet_port_direct">def</span> size_abbreviation <span class="xmlsnippet_operator">=</span> abbreviate_size<span class="xmlsnippet_operator">(</span> pet_size <span class="xmlsnippet_operator">)</span>
+
+<span class="xmlsnippet_operator">/</span><span class="xmlsnippet_operator">/</span>we will just use the first two characters of type <span class="xmlsnippet_port_direct">for</span> the prefix
+<span class="xmlsnippet_port_direct">def</span> sku_prefix <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">[</span><span class="code_zero_value">0</span><span class="xmlsnippet_operator">.</span><span class="code_hash_value">.1</span><span class="xmlsnippet_operator">]</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>toUpperCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+
+context<span class="xmlsnippet_operator">.</span>sku <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${sku_prefix}${size_abbreviation}01"</span>
+context<span class="xmlsnippet_operator">.</span>total_price <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${assess_grooming_cost(pet_type, size_abbreviation)}"</span>
+context<span class="xmlsnippet_operator">.</span>package_content_code <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${pet_type.toUpperCase()}-${pet_size.toUpperCase()}-ALL"</span>
+context<span class="xmlsnippet_operator">.</span>is_available <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"true"</span>
+
+
+<span class="xmlsnippet_port_direct">return</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pet_type, pet_size<span class="xmlsnippet_operator">)</span> ? 
+	<span class="xmlsnippet_punct">"getGroomingKits_response_all"</span> : <span class="xmlsnippet_punct">"getGroomingKits_response_error500"</span>
+		</pre>
+					</p>
+				</div>
+				<div class="page_footer">
+					<div class="footer_left">SoapUI Scripting for the terrified</div>
+					<div class="footer_right">Page 13 of 13</div>
+				</div>	
+			</div>			
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Page 7</TITLE>
+
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="global.css"/>
+	<script type="text/javascript" src="control_center.js"></script>
+    <script type="text/javascript">
+    <!--
+    var pageType="middle";
+    // -->
+    </script>
+</HEAD>
+<body>
+	<div class="page_container" id="suisftt_07">
+		<div class="std_paragraph_container">
+			<p>	
+	no advantage over creating a hardcoded xml document to send back as a response. It's been a lot of work for no benefit! 
+			</p>
+			<p>
+	To get out of our "overcoding" rut we are going to create a scenario where we would expect the response to change depending on input. In our pet grooming service we will probably want to return some different information depending on what type of pet is being worked with. Let's decide on some portions of the response that should reflect the input of different pet types.
+	<ol>
+	<li>The SKU should be different for the different <span class="code_property_text">type</span></span> of pet. (request)</li>
+	<li>The SKU might be different for the different <span class="code_property_text">size</span> of a pet. </li>
+	<li>The PRICE is going to differ depending on pet <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>The PACKAGECODE contains codified information about what product/services are in a package. (We were trying to keep the model simple so no complex arrays of items) PACKAGECODE will change based on the <span class="code_property_text">type</span> and <span class="code_property_text">size</span>.</li>
+	<li>SKU and PACKAGECODE will contain modified information from the request. What I mean by this is that "large" <span class="code_property_text">size</span> is going to need to be translated into "LG" and "LARGE".</li>
+	</ol>
+			</p>
+			<p>
+	That's a pretty good start. There's plenty there to justify writing our script. Arguably there's more we could do by using <span class="code_property_text">breed</span> and <span class="code_property_text">color</span> and we might come back to that sometime later. Let's start accessing the request object and using the information in our response.
+			</p>
+			<p>
+	In advance I know I'm going to use the values of <span class="code_property_text">type</span> and <span class="code_property_text">size</span> multiple times so we'll just go ahead and assign them to vars. For readability I tend to set a lot of vars in my own code, though there are some programming circles that frown upon using a lot of mutable objects.
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> pet_type <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>type<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_port_direct">def</span> pet_size <span class="xmlsnippet_operator">=</span> req<span class="xmlsnippet_operator">.</span>Body<span class="xmlsnippet_operator">.</span>getGroomingKit<span class="xmlsnippet_operator">.</span>size<span class="xmlsnippet_operator">.</span>text<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+	</pre>
+			</p>
+			<p>
+	Next we will handle the requirements to dynamically place value in 2 of 3 SKU segments. In our 6 character SKU the first 2 characters are <b>segment 1</b> and come from the first 2 characters of the pet <span class="code_property_text">type</span>. <b>Segment 2</b> has 2 characters and they represent the size so we need size abbreviation. <b>Segment 3</b> is a two digit number which we won't worry about changing dynamically at this point. The resulting SKU will be something like "CAMD01" for a medium sized canine pet.
+			</p>
+			<p>
+	For segment 1 we will capture the first 2 characters of our pet <span class="code_property_text">type</span> and we will uppercase them in one small piece of code:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> sku_prefix <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">[</span><span class="code_zero_value">0</span><span class="xmlsnippet_operator">.</span><span class="code_hash_value">.1</span><span class="xmlsnippet_operator">]</span><span class="xmlsnippet_operator">)</span><span class="xmlsnippet_operator">.</span>toUpperCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span>
+				</pre>
+			</p>
+			<p>
+	Next we need to fill in segment 2. We will get size abbreviation with a method using a switch statement. The abbreviate_size method takes an incoming <span class="code_property_text">size</span> ("sze") value and return the defined abbreviation for that size. Any unhandled size text will fall through as UK. (UnKnown)
+			</p>
+			<p>
+	The result of our abbreviate_size() method will be used in the SKU field and it will also be used to calculate base grooming costs by controlling the base cost multiplier.	
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 7 of 13</div>
+		</div>
+	</div>
+</body>
+</HTML>

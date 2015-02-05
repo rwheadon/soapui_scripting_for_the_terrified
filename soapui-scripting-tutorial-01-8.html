@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Page 8</TITLE>
+<link rel="stylesheet" type="text/css" href="global.css"/>
+<script type="text/javascript" src="control_center.js"></script>
+    <script type="text/javascript">
+    <!--
+    var pageType="middle";
+    // -->
+    </script>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+</HEAD>
+<body>
+	<div class="page_container" id="suisftt_08">
+		<div class="std_paragraph_container">
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> abbreviate_size<span class="xmlsnippet_operator">(</span> sze <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+		log<span class="xmlsnippet_operator">.</span>info<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_punct">"incoming size:${sze}"</span><span class="xmlsnippet_operator">)</span>
+		<span class="xmlsnippet_port_direct">def</span> result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"UK"</span>
+		switch<span class="xmlsnippet_operator">(</span> sze<span class="xmlsnippet_operator">.</span>toLowerCase<span class="xmlsnippet_operator">(</span><span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"large"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"LG"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"extra large"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XL"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"medium"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"MD"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"small"</span>:
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"SM"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+	<span class="xmlsnippet_port_direct">		case</span> <span class="xmlsnippet_punct">"tiny"</span> : 
+				result <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"XS"</span>
+				<span class="xmlsnippet_port_direct">break</span>
+		}
+		<span class="xmlsnippet_port_direct">return</span> result
+	}
+	</pre>
+			</p>
+			<p>
+	Finally for SKU we need to assign these values to the response we return. The following line of code will do that for us:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	context<span class="xmlsnippet_operator">.</span>sku <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_punct">"${sku_prefix}${size_abbreviation}01"</span>
+	</pre>
+			</p>
+			<p>
+	With these changes run the previous request and you should see SKU change depending on the values you plug into <span class="code_property_text">type</span> and <span class="code_property_text">size</span> request elements. I won't spend any time in the document for just testing the SKU, but tinker with it if you are so inclined at this point. For now our SKU related requirements from the list above are satisfied.
+			</p>
+			<p>
+	Next we will alter the price based on type and size request elements. Each <span class="code_property_text">type</span> of pet will carry a base price for their grooming and then we will increase the price according to pet size. For the base price we will have a hash of values. Cats will have a base price of 40.00 since 50% of groomers claim workman's comp after bathing a cat due to bites and scratches that become infected, but we shall depart from that digression. Dogs have a base cost of 23.00 and reptiles start at 50.00.  Any "new" or unhandled pet type will result in a 150.00 grooming price. The <span class="code_property_text">size</span> multiplier is also contained in a hash and incrementally increases as the pet size grows larger. XS pets will be a multiplier of the base x 1 while XL pets have a multiplier of 2.5. 
+			</p>
+			<p>
+	We will implement a method "assess_grooming_cost" which takes pet <span class="code_property_text">type</span> and pet <span class="code_property_text">size</span> as inputs. This is a pretty straightforward method so there's not much more to do than just plop it below:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> assess_grooming_cost<span class="xmlsnippet_operator">(</span> pet_type, pet_size <span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+		<span class="xmlsnippet_port_direct">def</span> base_cost <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>feline:<span class="code_zero_value">40</span>, canine:<span class="code_hash_value">23.00</span>, reptile:<span class="code_hash_value">50.00</span><span class="xmlsnippet_operator">]</span>
+		<span class="xmlsnippet_port_direct">def</span> multiplier <span class="xmlsnippet_operator">=</span> <span class="xmlsnippet_operator">[</span>XL:<span class="code_hash_value">2.5</span>, LG:<span class="code_hash_value">2.0</span>, MD:<span class="code_hash_value">1.75</span>, SM:<span class="code_hash_value">1.5</span>, XS:<span class="code_hash_value">1.00</span>, UK:<span class="code_hash_value">2.5</span><span class="xmlsnippet_operator">]</span>
+	<span class="xmlsnippet_port_direct">	if</span><span class="xmlsnippet_operator">(</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> &amp;&amp; multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span> > <span class="code_zero_value">0</span> <span class="xmlsnippet_operator">)</span><span class="xmlsnippet_colon">{</span>
+			<span class="xmlsnippet_port_direct">return</span> base_cost<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_type<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_operator">*</span> multiplier<span class="xmlsnippet_operator">.</span>get<span class="xmlsnippet_operator">(</span>pet_size<span class="xmlsnippet_operator">)</span>
+		<span class="xmlsnippet_colon">}</span>
+		<span class="xmlsnippet_port_direct">return</span> <span class="code_hash_value">150.00</span>
+	}
+	</pre>
+			</p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 8 of 13</div>
+		</div>
+	</div>
+</body>
+</HTML>

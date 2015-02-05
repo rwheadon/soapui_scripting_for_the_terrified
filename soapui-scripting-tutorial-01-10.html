@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Page 10</TITLE>
+
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css" href="global.css"/>
+<script type="text/javascript" src="control_center.js"></script>
+    <script type="text/javascript">
+    <!--
+    var pageType="middle";
+    // -->
+    </script>
+</HEAD>
+<body>
+	<div class="page_container" id="suisftt_10">
+		<div class="std_paragraph_container">
+			<p>	
+	In the current script a person could pass "human" or "alien" into the script and we would try to do something with it. The real problem with those example of deviations is that nobody in our grooming company wants to have humans and aliens coming in for a bath! We only like animals here. (...and not really ALL of them) We're going to just stop the madness by rejecting any requests that contain input we aren't built to handle.
+			</p>
+			<p>
+	First we need to create the response template we will return. I'm going to just make it a hardcoded, drop dead easy response for this tutorial. If you have some crazy ideas about forging tags in the error response to indicate what exactly went wrong then you are MY kind of programmer and I think you should go for it. But for now here's our response xml:
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span> <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">soapenv</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">schemas.xmlsoap.org</span><span class="xmlsnippet_path">/soap/envelope/</span><span class="xmlsnippet_punct">"</span> 
+	   <span class="xmlsnippet_ns">xmlns</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_target">gro</span><span class="xmlsnippet_operator">=</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_ns">http</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_port_direct">//</span><span class="xmlsnippet_domain">www.example.org</span><span class="xmlsnippet_path">/GroomingKits/</span><span class="xmlsnippet_punct">"</span><span class="xmlsnippet_brackets">&gt;</span>
+	   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Header</span><span class="xmlsnippet_brackets">/></span>
+	   <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+	      <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>500<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">error</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>Something went wrong<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">msg</span><span class="xmlsnippet_brackets">&gt;</span>
+	         <span class="xmlsnippet_brackets">&lt;</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>Check all of your input elements for proper values<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_code">detail</span><span class="xmlsnippet_brackets">&gt;</span>
+	      <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">gro</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">mockServiceError</span><span class="xmlsnippet_brackets">&gt;</span>
+	   <span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Body</span><span class="xmlsnippet_brackets">&gt;</span>
+	<span class="xmlsnippet_brackets">&lt;/</span><span class="xmlsnippet_ns">soapenv</span><span class="xmlsnippet_colon">:</span><span class="xmlsnippet_code">Envelope</span><span class="xmlsnippet_brackets">&gt;</span>
+	</pre>
+			</p>
+			<p>
+	Name the new mock response "getGroomingKits_response_error500". Now let's set a flag that determines when we call it. Since this is a bonus we won't make it perfect since there is a certain level of importance the author places on encouraging his readers to tweak and make things "better". Put the code below at the top of your script with the other methods we have written.
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">def</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pt , ps<span class="xmlsnippet_operator">)</span> <span class="xmlsnippet_colon">{</span>
+		handled_types<span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"feline"</span>,<span class="xmlsnippet_punct">"canine"</span>,<span class="xmlsnippet_punct">"reptile"</span><span class="xmlsnippet_operator">]</span>
+		handled_sizes<span class="xmlsnippet_operator">[</span><span class="xmlsnippet_punct">"tiny"</span>,<span class="xmlsnippet_punct">"small"</span>,<span class="xmlsnippet_punct">"medium"</span>,<span class="xmlsnippet_punct">"large"</span>,<span class="xmlsnippet_punct">"extra large"</span><span class="xmlsnippet_operator">]</span>
+		<span class="xmlsnippet_port_direct">return</span> <span class="xmlsnippet_operator">(</span>handled_types<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>pt<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span> &amp;&amp; <span class="xmlsnippet_operator">(</span>handled_sizes<span class="xmlsnippet_operator">.</span>indexOf<span class="xmlsnippet_operator">(</span>ps<span class="xmlsnippet_operator">)</span> ><span class="xmlsnippet_operator">=</span> <span class="code_zero_value">0</span><span class="xmlsnippet_operator">)</span>
+	<span class="xmlsnippet_colon">}</span>
+	</pre>
+			</p>
+			<p>
+	And finally modify the return statement at the end of our script.
+			</p>
+			<p>
+	<pre class="xmlsnippet_pre_default">
+	<span class="xmlsnippet_port_direct">return</span> check_handled_inputs<span class="xmlsnippet_operator">(</span>pet_type, pet_size<span class="xmlsnippet_operator">)</span> ? <span class="xmlsnippet_punct">"getGroomingKits_response_all"</span> 
+		: <span class="xmlsnippet_punct">"getGroomingKits_response_error500"</span>
+	</pre>
+			</p>
+			<p>
+	That's it and you are done. A lot of room has been left for you to exercise some creative thinking to make the simple mock service much more interactive and variable, but this tutorial should be sufficient to introduce the topic. Thanks for reading through everything and hopefully you now have NO reason to avoid scripting in SoapUI. The working source script is available in this document's Appendix A section.	
+			</p>
+			<p>
+		</div>
+		<div class="page_footer">
+			<div class="footer_left">SoapUI Scripting for the terrified</div>
+			<div class="footer_right">Page 10 of 13</div>
+		</div>
+	</div>
+</body>
+</HTML>
